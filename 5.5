@@ -1,0 +1,50 @@
+5.5 Video Options
+
+‘-vframes number (output)’
+Set the number of video frames to record. This is an alias for -frames:v.
+
+‘-r[:stream_specifier] fps (input/output,per-stream)’
+Set frame rate (Hz value, fraction or abbreviation).
+
+As an input option, ignore any timestamps stored in the file and instead generate timestamps assuming constant frame rate fps.
+
+As an output option, duplicate or drop input frames to achieve constant output frame rate fps.
+
+‘-s[:stream_specifier] size (input/output,per-stream)’
+Set frame size.
+
+As an input option, this is a shortcut for the ‘video_size’ private option, recognized by some demuxers for which the frame size is either not stored in the file or is configurable – e.g. raw video or video grabbers.
+
+As an output option, this inserts the scale video filter to the end of the corresponding filtergraph. Please use the scale filter directly to insert it at the beginning or some other place.
+
+The format is ‘wxh’ (default - same as source).
+
+‘-aspect[:stream_specifier] aspect (output,per-stream)’
+Set the video display aspect ratio specified by aspect.
+
+aspect can be a floating point number string, or a string of the form num:den, where num and den are the numerator and denominator of the aspect ratio. For example "4:3", "16:9", "1.3333", and "1.7777" are valid argument values.
+
+If used together with ‘-vcodec copy’, it will affect the aspect ratio stored at container level, but not the aspect ratio stored in encoded frames, if it exists.
+
+‘-vn (output)’
+Disable video recording.
+
+‘-vcodec codec (output)’
+Set the video codec. This is an alias for -codec:v.
+
+‘-pass[:stream_specifier] n (output,per-stream)’
+Select the pass number (1 or 2). It is used to do two-pass video encoding. The statistics of the video are recorded in the first pass into a log file (see also the option -passlogfile), and in the second pass that log file is used to generate the video at the exact requested bitrate. On pass 1, you may just deactivate audio and set output to null, examples for Windows and Unix:
+
+   
+ffmpeg -i foo.mov -c:v libxvid -pass 1 -an -f rawvideo -y NUL
+ffmpeg -i foo.mov -c:v libxvid -pass 1 -an -f rawvideo -y /dev/null
+‘-passlogfile[:stream_specifier] prefix (output,per-stream)’
+Set two-pass log file name prefix to prefix, the default file name prefix is “ffmpeg2pass”. The complete file name will be ‘PREFIX-N.log’, where N is a number specific to the output stream
+
+‘-vlang code’
+Set the ISO 639 language code (3 letters) of the current video stream.
+
+‘-vf filtergraph (output)’
+Create the filtergraph specified by filtergraph and use it to filter the stream.
+
+This is an alias for -filter:v, see the -filter option.
