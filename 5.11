@@ -1,0 +1,251 @@
+5.11 Advanced options
+
+‘-map [-]input_file_id[:stream_specifier][,sync_file_id[:stream_specifier]] | [linklabel] (output)’
+Designate one or more input streams as a source for the output file. Each input stream is identified by the input file index input_file_id and the input stream index input_stream_id within the input file. Both indices start at 0. If specified, sync_file_id:stream_specifier sets which input stream is used as a presentation sync reference.
+
+The first -map option on the command line specifies the source for output stream 0, the second -map option specifies the source for output stream 1, etc.
+
+A - character before the stream identifier creates a "negative" mapping. It disables matching streams from already created mappings.
+
+An alternative [linklabel] form will map outputs from complex filter graphs (see the ‘-filter_complex’ option) to the output file. linklabel must correspond to a defined output link label in the graph.
+
+For example, to map ALL streams from the first input file to output
+
+   
+ffmpeg -i INPUT -map 0 output
+For example, if you have two audio streams in the first input file, these streams are identified by "0:0" and "0:1". You can use -map to select which streams to place in an output file. For example:
+
+ 	
+ffmpeg -i INPUT -map 0:1 out.wav
+will map the input stream in ‘INPUT’ identified by "0:1" to the (single) output stream in ‘out.wav’.
+
+For example, to select the stream with index 2 from input file ‘a.mov’ (specified by the identifier "0:2"), and stream with index 6 from input ‘b.mov’ (specified by the identifier "1:6"), and copy them to the output file ‘out.mov’:
+
+ 	
+ffmpeg -i a.mov -i b.mov -c copy -map 0:2 -map 1:6 out.mov
+To select all video and the third audio stream from an input file:
+
+ 	
+ffmpeg -i INPUT -map 0:v -map 0:a:2 OUTPUT
+To map all the streams except the second audio, use negative mappings
+
+ 	
+ffmpeg -i INPUT -map 0 -map -0:a:1 OUTPUT
+Note that using this option disables the default mappings for this output file.
+
+‘-map_channel [input_file_id.stream_specifier.channel_id|-1][:output_file_id.stream_specifier]’
+Map an audio channel from a given input to an output. If output_file_id.stream_specifier is not set, the audio channel will be mapped on all the audio streams.
+
+Using "-1" instead of input_file_id.stream_specifier.channel_id will map a muted channel.
+
+For example, assuming INPUT is a stereo audio file, you can switch the two audio channels with the following command:
+
+ 	
+ffmpeg -i INPUT -map_channel 0.0.1 -map_channel 0.0.0 OUTPUT
+If you want to mute the first channel and keep the second:
+
+ 	
+ffmpeg -i INPUT -map_channel -1 -map_channel 0.0.1 OUTPUT
+The order of the "-map_channel" option specifies the order of the channels in the output stream. The output channel layout is guessed from the number of channels mapped (mono if one "-map_channel", stereo if two, etc.). Using "-ac" in combination of "-map_channel" makes the channel gain levels to be updated if input and output channel layouts don’t match (for instance two "-map_channel" options and "-ac 6").
+
+You can also extract each channel of an input to specific outputs; the following command extracts two channels of the INPUT audio stream (file 0, stream 0) to the respective OUTPUT_CH0 and OUTPUT_CH1 outputs:
+
+ 	
+ffmpeg -i INPUT -map_channel 0.0.0 OUTPUT_CH0 -map_channel 0.0.1 OUTPUT_CH1
+The following example splits the channels of a stereo input into two separate streams, which are put into the same output file:
+
+ 	
+ffmpeg -i stereo.wav -map 0:0 -map 0:0 -map_channel 0.0.0:0.0 -map_channel 0.0.1:0.1 -y out.ogg
+Note that currently each output stream can only contain channels from a single input stream; you can’t for example use "-map_channel" to pick multiple input audio channels contained in different streams (from the same or different files) and merge them into a single output stream. It is therefore not currently possible, for example, to turn two separate mono streams into a single stereo stream. However splitting a stereo stream into two single channel mono streams is possible.
+
+If you need this feature, a possible workaround is to use the amerge filter. For example, if you need to merge a media (here ‘input.mkv’) with 2 mono audio streams into one single stereo channel audio stream (and keep the video stream), you can use the following command:
+
+ 	
+ffmpeg -i input.mkv -filter_complex "[0:1] [0:2] amerge" -c:a pcm_s16le -c:v copy output.mkv
+‘-map_metadata[:metadata_spec_out] infile[:metadata_spec_in] (output,per-metadata)’
+Set metadata information of the next output file from infile. Note that those are file indices (zero-based), not filenames. Optional metadata_spec_in/out parameters specify, which metadata to copy. A metadata specifier can have the following forms:
+
+‘g’
+global metadata, i.e. metadata that applies to the whole file
+
+‘s[:stream_spec]’
+per-stream metadata. stream_spec is a stream specifier as described in the Stream specifiers chapter. In an input metadata specifier, the first matching stream is copied from. In an output metadata specifier, all matching streams are copied to.
+
+‘c:chapter_index’
+per-chapter metadata. chapter_index is the zero-based chapter index.
+
+‘p:program_index’
+per-program metadata. program_index is the zero-based program index.
+
+If metadata specifier is omitted, it defaults to global.
+
+By default, global metadata is copied from the first input file, per-stream and per-chapter metadata is copied along with streams/chapters. These default mappings are disabled by creating any mapping of the relevant type. A negative file index can be used to create a dummy mapping that just disables automatic copying.
+
+For example to copy metadata from the first stream of the input file to global metadata of the output file:
+
+ 	
+ffmpeg -i in.ogg -map_metadata 0:s:0 out.mp3
+To do the reverse, i.e. copy global metadata to all audio streams:
+
+ 	
+ffmpeg -i in.mkv -map_metadata:s:a 0:g out.mkv
+Note that simple 0 would work as well in this example, since global metadata is assumed by default.
+
+‘-map_chapters input_file_index (output)’
+Copy chapters from input file with index input_file_index to the next output file. If no chapter mapping is specified, then chapters are copied from the first input file with at least one chapter. Use a negative file index to disable any chapter copying.
+
+‘-benchmark (global)’
+Show benchmarking information at the end of an encode. Shows CPU time used and maximum memory consumption. Maximum memory consumption is not supported on all systems, it will usually display as 0 if not supported.
+
+‘-benchmark_all (global)’
+Show benchmarking information during the encode. Shows CPU time used in various steps (audio/video encode/decode).
+
+‘-timelimit duration (global)’
+Exit after ffmpeg has been running for duration seconds.
+
+‘-dump (global)’
+Dump each input packet to stderr.
+
+‘-hex (global)’
+When dumping packets, also dump the payload.
+
+‘-re (input)’
+Read input at native frame rate. Mainly used to simulate a grab device. By default ffmpeg attempts to read the input(s) as fast as possible. This option will slow down the reading of the input(s) to the native frame rate of the input(s). It is useful for real-time output (e.g. live streaming). If your input(s) is coming from some other live streaming source (through HTTP or UDP for example) the server might already be in real-time, thus the option will likely not be required. On the other hand, this is meaningful if your input(s) is a file you are trying to push in real-time.
+
+‘-loop_input’
+Loop over the input stream. Currently it works only for image streams. This option is used for automatic FFserver testing. This option is deprecated, use -loop 1.
+
+‘-loop_output number_of_times’
+Repeatedly loop output for formats that support looping such as animated GIF (0 will loop the output infinitely). This option is deprecated, use -loop.
+
+‘-vsync parameter’
+Video sync method. For compatibility reasons old values can be specified as numbers. Newly added values will have to be specified as strings always.
+
+‘0, passthrough’
+Each frame is passed with its timestamp from the demuxer to the muxer.
+
+‘1, cfr’
+Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.
+
+‘2, vfr’
+Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.
+
+‘drop’
+As passthrough but destroys all timestamps, making the muxer generate fresh timestamps based on frame-rate.
+
+‘-1, auto’
+Chooses between 1 and 2 depending on muxer capabilities. This is the default method.
+
+Note that the timestamps may be further modified by the muxer, after this. For example, in the case that the format option ‘avoid_negative_ts’ is enabled.
+
+With -map you can select from which stream the timestamps should be taken. You can leave either video or audio unchanged and sync the remaining stream(s) to the unchanged one.
+
+‘-async samples_per_second’
+Audio sync method. "Stretches/squeezes" the audio stream to match the timestamps, the parameter is the maximum samples per second by which the audio is changed. -async 1 is a special case where only the start of the audio stream is corrected without any later correction.
+
+Note that the timestamps may be further modified by the muxer, after this. For example, in the case that the format option ‘avoid_negative_ts’ is enabled.
+
+This option has been deprecated. Use the aresample audio filter instead.
+
+‘-copyts’
+Do not process input timestamps, but keep their values without trying to sanitize them. In particular, do not remove the initial start time offset value.
+
+Note that, depending on the ‘vsync’ option or on specific muxer processing (e.g. in case the format option ‘avoid_negative_ts’ is enabled) the output timestamps may mismatch with the input timestamps even when this option is selected.
+
+‘-copytb mode’
+Specify how to set the encoder timebase when stream copying. mode is an integer numeric value, and can assume one of the following values:
+
+‘1’
+Use the demuxer timebase.
+
+The time base is copied to the output encoder from the corresponding input demuxer. This is sometimes required to avoid non monotonically increasing timestamps when copying video streams with variable frame rate.
+
+‘0’
+Use the decoder timebase.
+
+The time base is copied to the output encoder from the corresponding input decoder.
+
+‘-1’
+Try to make the choice automatically, in order to generate a sane output.
+
+Default value is -1.
+
+‘-shortest (output)’
+Finish encoding when the shortest input stream ends.
+
+‘-dts_delta_threshold’
+Timestamp discontinuity delta threshold.
+
+‘-muxdelay seconds (input)’
+Set the maximum demux-decode delay.
+
+‘-muxpreload seconds (input)’
+Set the initial demux-decode delay.
+
+‘-streamid output-stream-index:new-value (output)’
+Assign a new stream-id value to an output stream. This option should be specified prior to the output filename to which it applies. For the situation where multiple output files exist, a streamid may be reassigned to a different value.
+
+For example, to set the stream 0 PID to 33 and the stream 1 PID to 36 for an output mpegts file:
+
+ 	
+ffmpeg -i infile -streamid 0:33 -streamid 1:36 out.ts
+‘-bsf[:stream_specifier] bitstream_filters (output,per-stream)’
+Set bitstream filters for matching streams. bitstream_filters is a comma-separated list of bitstream filters. Use the -bsfs option to get the list of bitstream filters.
+
+ 	
+ffmpeg -i h264.mp4 -c:v copy -bsf:v h264_mp4toannexb -an out.h264
+ 	
+ffmpeg -i file.mov -an -vn -bsf:s mov2textsub -c:s copy -f rawvideo sub.txt
+‘-tag[:stream_specifier] codec_tag (per-stream)’
+Force a tag/fourcc for matching streams.
+
+‘-timecode hh:mm:ssSEPff’
+Specify Timecode for writing. SEP is ’:’ for non drop timecode and ’;’ (or ’.’) for drop.
+
+ 	
+ffmpeg -i input.mpg -timecode 01:02:03.04 -r 30000/1001 -s ntsc output.mpg
+
+‘-filter_complex filtergraph (global)’
+Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs. For simple graphs – those with one input and one output of the same type – see the ‘-filter’ options. filtergraph is a description of the filtergraph, as described in the “Filtergraph syntax” section of the ffmpeg-filters manual.
+
+Input link labels must refer to input streams using the [file_index:stream_specifier] syntax (i.e. the same as ‘-map’ uses). If stream_specifier matches multiple streams, the first one will be used. An unlabeled input will be connected to the first unused input stream of the matching type.
+
+Output link labels are referred to with ‘-map’. Unlabeled outputs are added to the first output file.
+
+Note that with this option it is possible to use only lavfi sources without normal input files.
+
+For example, to overlay an image over video
+
+ 	
+ffmpeg -i video.mkv -i image.png -filter_complex '[0:v][1:v]overlay[out]' -map
+'[out]' out.mkv
+Here [0:v] refers to the first video stream in the first input file, which is linked to the first (main) input of the overlay filter. Similarly the first video stream in the second input is linked to the second (overlay) input of overlay.
+
+Assuming there is only one video stream in each input file, we can omit input labels, so the above is equivalent to
+
+ 	
+ffmpeg -i video.mkv -i image.png -filter_complex 'overlay[out]' -map
+'[out]' out.mkv
+Furthermore we can omit the output label and the single output from the filter graph will be added to the output file automatically, so we can simply write
+
+ 	
+ffmpeg -i video.mkv -i image.png -filter_complex 'overlay' out.mkv
+To generate 5 seconds of pure red video using lavfi color source:
+
+ 	
+ffmpeg -filter_complex 'color=c=red' -t 5 out.mkv
+‘-lavfi filtergraph (global)’
+Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs. Equivalent to ‘-filter_complex’.
+
+‘-filter_complex_script filename (global)’
+This option is similar to ‘-filter_complex’, the only difference is that its argument is the name of the file from which a complex filtergraph description is to be read.
+
+As a special exception, you can use a bitmap subtitle stream as input: it will be converted into a video with the same size as the largest video in the file, or 720x576 if no video is present. Note that this is an experimental and temporary solution. It will be removed once libavfilter has proper support for subtitles.
+
+For example, to hardcode subtitles on top of a DVB-T recording stored in MPEG-TS format, delaying the subtitles by 1 second:
+
+ 	
+ffmpeg -i input.ts -filter_complex \
+  '[#0x2ef] setpts=PTS+1/TB [sub] ; [#0x2d0] [sub] overlay' \
+  -sn -map '#0x2dc' output.mkv
+(0x2d0, 0x2dc and 0x2ef are the MPEG-TS PIDs of respectively the video, audio and subtitles streams; 0:0, 0:3 and 0:7 would have worked too)
