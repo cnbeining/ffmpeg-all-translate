@@ -1,0 +1,20 @@
+10. OpenCL Options
+
+When FFmpeg is configured with --enable-opencl, it is possible to set the options for the global OpenCL context.
+
+The list of supported options follows:
+
+‘build_options’
+Set build options used to compile the registered kernels.
+
+See reference "OpenCL Specification Version: 1.2 chapter 5.6.4".
+
+‘platform_idx’
+Select the index of the platform to run OpenCL code.
+
+The specified index must be one of the indexes in the device list which can be obtained with av_opencl_get_device_list().
+
+‘device_idx’
+Select the index of the device used to run OpenCL code.
+
+The specifed index must be one of the indexes in the device list which can be obtained with av_opencl_get_device_list().
