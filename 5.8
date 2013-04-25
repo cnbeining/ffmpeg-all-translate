@@ -1,0 +1,10 @@
+5.8 Advanced Audio options:
+
+‘-atag fourcc/tag (output)’
+Force audio tag/fourcc. This is an alias for -tag:a.
+
+‘-absf bitstream_filter’
+Deprecated, see -bsf
+
+‘-guess_layout_max channels (input,per-stream)’
+If some input channel layout is not known, try to guess only if it corresponds to at most the specified number of channels. For example, 2 tells to ffmpeg to recognize 1 channel as mono and 2 channels as stereo but not 6 channels as 5.1. The default is to always try to guess. Use 0 to disable all guessing.
