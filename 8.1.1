@@ -1,0 +1,16 @@
+8.1.1 Examples
+Escape the string Crime d'Amour containing the ' special character:
+   
+Crime d\'Amour
+The string above contains a quote, so the ' needs to be escaped when quoting it:
+ 	
+'Crime d'\''Amour'
+Include leading or trailing whitespaces using quoting:
+ 	
+'  this string starts and ends with whitespaces  '
+Escaping and quoting can be mixed together:
+ 	
+' The string '\'string\'' is a string '
+To include a literal \ you can use either escaping or quoting:
+ 	
+'c:\foo' can be written as c:\\foo
