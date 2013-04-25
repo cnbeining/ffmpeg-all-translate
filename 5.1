@@ -1,0 +1,23 @@
+5.1 Stream specifiers
+
+Some options are applied per-stream, e.g. bitrate or codec. Stream specifiers are used to precisely specify which stream(s) a given option belongs to.
+
+A stream specifier is a string generally appended to the option name and separated from it by a colon. E.g. -codec:a:1 ac3 contains the a:1 stream specifier, which matches the second audio stream. Therefore, it would select the ac3 codec for the second audio stream.
+
+A stream specifier can match several streams, so that the option is applied to all of them. E.g. the stream specifier in -b:a 128k matches all audio streams.
+
+An empty stream specifier matches all streams. For example, -codec copy or -codec: copy would copy all the streams without reencoding.
+
+Possible forms of stream specifiers are:
+
+‘stream_index’
+Matches the stream with this index. E.g. -threads:1 4 would set the thread count for the second stream to 4.
+
+‘stream_type[:stream_index]’
+stream_type is one of following: ’v’ for video, ’a’ for audio, ’s’ for subtitle, ’d’ for data, and ’t’ for attachments. If stream_index is given, then it matches stream number stream_index of this type. Otherwise, it matches all streams of this type.
+
+‘p:program_id[:stream_index]’
+If stream_index is given, then it matches the stream with number stream_index in the program with the id program_id. Otherwise, it matches all streams in the program.
+
+‘#stream_id’
+Matches the stream by a format-specific ID.
