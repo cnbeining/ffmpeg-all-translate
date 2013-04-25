@@ -1,0 +1,4 @@
+
+3.1 Filtering
+
+Before encoding, ffmpeg can process raw audio and video frames using filters from the libavfilter library. Several chained filters form a filter graph. ffmpeg distinguishes between two types of filtergraphs: simple and complex.
