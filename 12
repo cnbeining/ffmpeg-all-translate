@@ -1,0 +1,9 @@
+12. Decoders
+
+Decoders are configured elements in FFmpeg which allow the decoding of multimedia streams.
+
+When you configure your FFmpeg build, all the supported native decoders are enabled by default. Decoders requiring an external library must be enabled manually via the corresponding --enable-lib option. You can list all available decoders using the configure option --list-decoders.
+
+You can disable all the decoders with the configure option --disable-decoders and selectively enable / disable single decoders with the options --enable-decoder=DECODER / --disable-decoder=DECODER.
+
+The option -codecs of the ff* tools will display the list of enabled decoders.
