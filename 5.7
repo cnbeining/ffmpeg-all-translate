@@ -1,0 +1,27 @@
+5.7 Audio Options
+
+‘-aframes number (output)’
+Set the number of audio frames to record. This is an alias for -frames:a.
+
+‘-ar[:stream_specifier] freq (input/output,per-stream)’
+Set the audio sampling frequency. For output streams it is set by default to the frequency of the corresponding input stream. For input streams this option only makes sense for audio grabbing devices and raw demuxers and is mapped to the corresponding demuxer options.
+
+‘-aq q (output)’
+Set the audio quality (codec-specific, VBR). This is an alias for -q:a.
+
+‘-ac[:stream_specifier] channels (input/output,per-stream)’
+Set the number of audio channels. For output streams it is set by default to the number of input audio channels. For input streams this option only makes sense for audio grabbing devices and raw demuxers and is mapped to the corresponding demuxer options.
+
+‘-an (output)’
+Disable audio recording.
+
+‘-acodec codec (input/output)’
+Set the audio codec. This is an alias for -codec:a.
+
+‘-sample_fmt[:stream_specifier] sample_fmt (output,per-stream)’
+Set the audio sample format. Use -sample_fmts to get a list of supported sample formats.
+
+‘-af filtergraph (output)’
+Create the filtergraph specified by filtergraph and use it to filter the stream.
+
+This is an alias for -filter:a, see the -filter option.
