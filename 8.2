@@ -1,0 +1,10 @@
+8.2 Date
+
+The accepted syntax is:
+
+   
+[(YYYY-MM-DD|YYYYMMDD)[T|t| ]]((HH:MM:SS[.m...]]])|(HHMMSS[.m...]]]))[Z]
+now
+If the value is "now" it takes the current time.
+
+Time is local time unless Z is appended, in which case it is interpreted as UTC. If the year-month-day part is not specified it takes the current year-month-day.
