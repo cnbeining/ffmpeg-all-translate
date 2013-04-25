@@ -1,0 +1,14 @@
+3. Detailed description
+
+The transcoding process in ffmpeg for each output can be described by the following diagram:
+
+   
+ _______              ______________               _________              ______________            ________
+|       |            |              |             |         |            |              |          |        |
+| input |  demuxer   | encoded data |   decoder   | decoded |  encoder   | encoded data |  muxer   | output |
+| file  | ---------> | packets      |  ---------> | frames  | ---------> | packets      | -------> | file   |
+|_______|            |______________|             |_________|            |______________|          |________|
+
+ffmpeg calls the libavformat library (containing demuxers) to read input files and get packets containing encoded data from them. When there are multiple input files, ffmpeg tries to keep them synchronized by tracking lowest timestamp on any active input stream.
+
+Encoded packets are then passed to the decoder (unless streamcopy is selected for the stream, see further for a description). The decoder produces uncompressed frames (raw video/PCM audio/...) which can be processed further by filtering (see next section). After filtering, the frames are passed to the encoder, which encodes them and outputs encoded packets. Finally those are passed to the muxer, which writes the encoded packets to the output file.
