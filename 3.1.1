@@ -1,0 +1,19 @@
+3.1.1 Simple filtergraphs
+Simple filtergraphs are those that have exactly one input and output, both of the same type. In the above diagram they can be represented by simply inserting an additional step between decoding and encoding:
+
+   
+ _________                        __________              ______________
+|         |                      |          |            |              |
+| decoded |  simple filtergraph  | filtered |  encoder   | encoded data |
+| frames  | -------------------> | frames   | ---------> | packets      |
+|_________|                      |__________|            |______________|
+
+Simple filtergraphs are configured with the per-stream ‘-filter’ option (with ‘-vf’ and ‘-af’ aliases for video and audio respectively). A simple filtergraph for video can look for example like this:
+
+ 	
+ _______        _____________        _______        _____        ________
+|       |      |             |      |       |      |     |      |        |
+| input | ---> | deinterlace | ---> | scale | ---> | fps | ---> | output |
+|_______|      |_____________|      |_______|      |_____|      |________|
+
+Note that some filters change frame properties but not frame contents. E.g. the fps filter in the example above changes number of frames, but does not touch the frame contents. Another example is the setpts filter, which only sets timestamps and otherwise passes the frames unchanged.
