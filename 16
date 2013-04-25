@@ -1,0 +1,9 @@
+16. Encoders
+
+Encoders are configured elements in FFmpeg which allow the encoding of multimedia streams.
+
+When you configure your FFmpeg build, all the supported native encoders are enabled by default. Encoders requiring an external library must be enabled manually via the corresponding --enable-lib option. You can list all available encoders using the configure option --list-encoders.
+
+You can disable all the encoders with the configure option --disable-encoders and selectively enable / disable single encoders with the options --enable-encoder=ENCODER / --disable-encoder=ENCODER.
+
+The option -codecs of the ff* tools will display the list of enabled encoders.
