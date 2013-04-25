@@ -1,0 +1,13 @@
+8.1 Quoting and escaping
+
+FFmpeg adopts the following quoting and escaping mechanism, unless explicitly specified. The following rules are applied:
+
+' and \ are special characters (respectively used for quoting and escaping). In addition to them, there might be other special characters depending on the specific syntax where the escaping and quoting are employed.
+A special character is escaped by prefixing it with a ’\’.
+All characters enclosed between ” are included literally in the parsed string. The quote character ' itself cannot be quoted, so you may need to close the quote and escape it.
+Leading and trailing whitespaces, unless escaped or quoted, are removed from the parsed string.
+Note that you may need to add a second level of escaping when using the command line or a script, which depends on the syntax of the adopted shell language.
+
+The function av_get_token defined in ‘libavutil/avstring.h’ can be used to parse a token quoted or escaped according to the rules defined above.
+
+The tool ‘tools/ffescape’ in the FFmpeg source tree can be used to automatically quote or escape a string in a script.
