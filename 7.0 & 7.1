@@ -1,0 +1,7 @@
+7. Examples
+
+7.1 Preset files
+
+A preset file contains a sequence of option=value pairs, one for each line, specifying a sequence of options which can be specified also on the command line. Lines starting with the hash (’#’) character are ignored and are used to provide comments. Empty lines are also ignored. Check the ‘presets’ directory in the FFmpeg source tree for examples.
+
+Preset files are specified with the pre option, this option takes a preset name as input. FFmpeg searches for a file named preset_name.avpreset in the directories ‘$AVCONV_DATADIR’ (if set), and ‘$HOME/.ffmpeg’, and in the data directory defined at configuration time (usually ‘$PREFIX/share/ffmpeg’) in that order. For example, if the argument is libx264-max, it will search for the file ‘libx264-max.avpreset’.
