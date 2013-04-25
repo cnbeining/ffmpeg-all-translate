@@ -1,0 +1,28 @@
+
+
+3.1.2 Complex filtergraphs
+Complex filtergraphs are those which cannot be described as simply a linear processing chain applied to one stream. This is the case, for example, when the graph has more than one input and/or output, or when output stream type is different from input. They can be represented with the following diagram:
+
+   
+ _________
+|         |
+| input 0 |\                    __________
+|_________| \                  |          |
+             \   _________    /| output 0 |
+              \ |         |  / |__________|
+ _________     \| complex | /
+|         |     |         |/
+| input 1 |---->| filter  |\
+|_________|     |         | \   __________
+               /| graph   |  \ |          |
+              / |         |   \| output 1 |
+ _________   /  |_________|    |__________|
+|         | /
+| input 2 |/
+|_________|
+
+Complex filtergraphs are configured with the ‘-filter_complex’ option. Note that this option is global, since a complex filtergraph, by its nature, cannot be unambiguously associated with a single stream or file.
+
+The ‘-lavfi’ option is equivalent to ‘-filter_complex’.
+
+A trivial example of a complex filtergraph is the overlay filter, which has two video inputs and one video output, containing one video overlaid on top of the other. Its audio counterpart is the amix filter.
