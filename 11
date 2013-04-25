@@ -1,0 +1,1060 @@
+11. Codec Options
+
+libavcodec provides some generic global options, which can be set on all the encoders and decoders. In addition each codec may support so-called private options, which are specific for a given codec.
+
+Sometimes, a global option may only affect a specific kind of codec, and may be unsensical or ignored by another, so you need to be aware of the meaning of the specified options. Also some options are meant only for decoding or encoding.
+
+Options may be set by specifying -option value in the FFmpeg tools, or by setting the value explicitly in the AVCodecContext options or using the ‘libavutil/opt.h’ API for programmatic use.
+
+The list of supported options follow:
+
+‘b integer (encoding,audio,video)’
+Set bitrate in bits/s. Default value is 200K.
+
+‘ab integer (encoding,audio)’
+Set audio bitrate (in bits/s). Default value is 128K.
+
+‘bt integer (encoding,video)’
+Set video bitrate tolerance (in bits/s). In 1-pass mode, bitrate tolerance specifies how far ratecontrol is willing to deviate from the target average bitrate value. This is not related to min/max bitrate. Lowering tolerance too much has an adverse effect on quality.
+
+‘flags flags (decoding/encoding,audio,video,subtitles)’
+Set generic flags.
+
+Possible values:
+
+‘mv4’
+Use four motion vector by macroblock (mpeg4).
+
+‘qpel’
+Use 1/4 pel motion compensation.
+
+‘loop’
+Use loop filter.
+
+‘qscale’
+Use fixed qscale.
+
+‘gmc’
+Use gmc.
+
+‘mv0’
+Always try a mb with mv=<0,0>.
+
+‘input_preserved’
+‘pass1’
+Use internal 2pass ratecontrol in first pass mode.
+
+‘pass2’
+Use internal 2pass ratecontrol in second pass mode.
+
+‘gray’
+Only decode/encode grayscale.
+
+‘emu_edge’
+Do not draw edges.
+
+‘psnr’
+Set error[?] variables during encoding.
+
+‘truncated’
+‘naq’
+Normalize adaptive quantization.
+
+‘ildct’
+Use interlaced DCT.
+
+‘low_delay’
+Force low delay.
+
+‘global_header’
+Place global headers in extradata instead of every keyframe.
+
+‘bitexact’
+Use only bitexact stuff (except (I)DCT).
+
+‘aic’
+Apply H263 advanced intra coding / mpeg4 ac prediction.
+
+‘cbp’
+Deprecated, use mpegvideo private options instead.
+
+‘qprd’
+Deprecated, use mpegvideo private options instead.
+
+‘ilme’
+Apply interlaced motion estimation.
+
+‘cgop’
+Use closed gop.
+
+‘sub_id integer’
+Deprecated, currently unused.
+
+‘me_method integer (encoding,video)’
+Set motion estimation method.
+
+Possible values:
+
+‘zero’
+zero motion estimation (fastest)
+
+‘full’
+full motion estimation (slowest)
+
+‘epzs’
+EPZS motion estimation (default)
+
+‘esa’
+esa motion estimation (alias for full)
+
+‘tesa’
+tesa motion estimation
+
+‘dia’
+dia motion estimation (alias for epzs)
+
+‘log’
+log motion estimation
+
+‘phods’
+phods motion estimation
+
+‘x1’
+X1 motion estimation
+
+‘hex’
+hex motion estimation
+
+‘umh’
+umh motion estimation
+
+‘iter’
+iter motion estimation
+
+‘extradata_size integer’
+Set extradata size.
+
+‘time_base rational number’
+Set codec time base.
+
+It is the fundamental unit of time (in seconds) in terms of which frame timestamps are represented. For fixed-fps content, timebase should be 1 / frame_rate and timestamp increments should be identically 1.
+
+‘g integer (encoding,video)’
+Set the group of picture size. Default value is 12.
+
+‘ar integer (decoding/encoding,audio)’
+Set audio sampling rate (in Hz).
+
+‘ac integer (decoding/encoding,audio)’
+Set number of audio channels.
+
+‘cutoff integer (encoding,audio)’
+Set cutoff bandwidth.
+
+‘frame_size integer (encoding,audio)’
+Set audio frame size.
+
+Each submitted frame except the last must contain exactly frame_size samples per channel. May be 0 when the codec has CODEC_CAP_VARIABLE_FRAME_SIZE set, in that case the frame size is not restricted. It is set by some decoders to indicate constant frame size.
+
+‘frame_number integer’
+Set the frame number.
+
+‘delay integer’
+‘qcomp float (encoding,video)’
+Set video quantizer scale compression (VBR). It is used as a constant in the ratecontrol equation. Recommended range for default rc_eq: 0.0-1.0.
+
+‘qblur float (encoding,video)’
+Set video quantizer scale blur (VBR).
+
+‘qmin integer (encoding,video)’
+Set min video quantizer scale (VBR). Must be included between -1 and 69, default value is 2.
+
+‘qmax integer (encoding,video)’
+Set max video quantizer scale (VBR). Must be included between -1 and 1024, default value is 31.
+
+‘qdiff integer (encoding,video)’
+Set max difference between the quantizer scale (VBR).
+
+‘bf integer (encoding,video)’
+Set max number of B frames.
+
+‘b_qfactor float (encoding,video)’
+Set qp factor between P and B frames.
+
+‘rc_strategy integer (encoding,video)’
+Set ratecontrol method.
+
+‘b_strategy integer (encoding,video)’
+Set strategy to choose between I/P/B-frames.
+
+‘ps integer (encoding,video)’
+Set RTP payload size in bytes.
+
+‘mv_bits integer’
+‘header_bits integer’
+‘i_tex_bits integer’
+‘p_tex_bits integer’
+‘i_count integer’
+‘p_count integer’
+‘skip_count integer’
+‘misc_bits integer’
+‘frame_bits integer’
+‘codec_tag integer’
+‘bug flags (decoding,video)’
+Workaround not auto detected encoder bugs.
+
+Possible values:
+
+‘autodetect’
+‘old_msmpeg4’
+some old lavc generated msmpeg4v3 files (no autodetection)
+
+‘xvid_ilace’
+Xvid interlacing bug (autodetected if fourcc==XVIX)
+
+‘ump4’
+(autodetected if fourcc==UMP4)
+
+‘no_padding’
+padding bug (autodetected)
+
+‘amv’
+‘ac_vlc’
+illegal vlc bug (autodetected per fourcc)
+
+‘qpel_chroma’
+‘std_qpel’
+old standard qpel (autodetected per fourcc/version)
+
+‘qpel_chroma2’
+‘direct_blocksize’
+direct-qpel-blocksize bug (autodetected per fourcc/version)
+
+‘edge’
+edge padding bug (autodetected per fourcc/version)
+
+‘hpel_chroma’
+‘dc_clip’
+‘ms’
+Workaround various bugs in microsoft broken decoders.
+
+‘trunc’
+trancated frames
+
+‘lelim integer (encoding,video)’
+Set single coefficient elimination threshold for luminance (negative values also consider DC coefficient).
+
+‘celim integer (encoding,video)’
+Set single coefficient elimination threshold for chrominance (negative values also consider dc coefficient)
+
+‘strict integer (decoding/encoding,audio,video)’
+Specify how strictly to follow the standards.
+
+Possible values:
+
+‘very’
+strictly conform to a older more strict version of the spec or reference software
+
+‘strict’
+strictly conform to all the things in the spec no matter what consequences
+
+‘normal’
+‘unofficial’
+allow unofficial extensions
+
+‘experimental’
+allow non standardized experimental things
+
+‘b_qoffset float (encoding,video)’
+Set QP offset between P and B frames.
+
+‘err_detect flags (decoding,audio,video)’
+Set error detection flags.
+
+Possible values:
+
+‘crccheck’
+verify embedded CRCs
+
+‘bitstream’
+detect bitstream specification deviations
+
+‘buffer’
+detect improper bitstream length
+
+‘explode’
+abort decoding on minor error detection
+
+‘careful’
+consider things that violate the spec and have not been seen in the wild as errors
+
+‘compliant’
+consider all spec non compliancies as errors
+
+‘aggressive’
+consider things that a sane encoder should not do as an error
+
+‘has_b_frames integer’
+‘block_align integer’
+‘mpeg_quant integer (encoding,video)’
+Use MPEG quantizers instead of H.263.
+
+‘qsquish float (encoding,video)’
+How to keep quantizer between qmin and qmax (0 = clip, 1 = use differentiable function).
+
+‘rc_qmod_amp float (encoding,video)’
+Set experimental quantizer modulation.
+
+‘rc_qmod_freq integer (encoding,video)’
+Set experimental quantizer modulation.
+
+‘rc_override_count integer’
+‘rc_eq string (encoding,video)’
+Set rate control equation. When computing the expression, besides the standard functions defined in the section ’Expression Evaluation’, the following functions are available: bits2qp(bits), qp2bits(qp). Also the following constants are available: iTex pTex tex mv fCode iCount mcVar var isI isP isB avgQP qComp avgIITex avgPITex avgPPTex avgBPTex avgTex.
+
+‘maxrate integer (encoding,audio,video)’
+Set max bitrate tolerance (in bits/s). Requires bufsize to be set.
+
+‘minrate integer (encoding,audio,video)’
+Set min bitrate tolerance (in bits/s). Most useful in setting up a CBR encode. It is of little use elsewise.
+
+‘bufsize integer (encoding,audio,video)’
+Set ratecontrol buffer size (in bits).
+
+‘rc_buf_aggressivity float (encoding,video)’
+Currently useless.
+
+‘i_qfactor float (encoding,video)’
+Set QP factor between P and I frames.
+
+‘i_qoffset float (encoding,video)’
+Set QP offset between P and I frames.
+
+‘rc_init_cplx float (encoding,video)’
+Set initial complexity for 1-pass encoding.
+
+‘dct integer (encoding,video)’
+Set DCT algorithm.
+
+Possible values:
+
+‘auto’
+autoselect a good one (default)
+
+‘fastint’
+fast integer
+
+‘int’
+accurate integer
+
+‘mmx’
+‘altivec’
+‘faan’
+floating point AAN DCT
+
+‘lumi_mask float (encoding,video)’
+Compress bright areas stronger than medium ones.
+
+‘tcplx_mask float (encoding,video)’
+Set temporal complexity masking.
+
+‘scplx_mask float (encoding,video)’
+Set spatial complexity masking.
+
+‘p_mask float (encoding,video)’
+Set inter masking.
+
+‘dark_mask float (encoding,video)’
+Compress dark areas stronger than medium ones.
+
+‘idct integer (decoding/encoding,video)’
+Select IDCT implementation.
+
+Possible values:
+
+‘auto’
+‘int’
+‘simple’
+‘simplemmx’
+‘libmpeg2mmx’
+‘mmi’
+‘arm’
+‘altivec’
+‘sh4’
+‘simplearm’
+‘simplearmv5te’
+‘simplearmv6’
+‘simpleneon’
+‘simplealpha’
+‘h264’
+‘vp3’
+‘ipp’
+‘xvidmmx’
+‘faani’
+floating point AAN IDCT
+
+‘slice_count integer’
+‘ec flags (decoding,video)’
+Set error concealment strategy.
+
+Possible values:
+
+‘guess_mvs’
+iterative motion vector (MV) search (slow)
+
+‘deblock’
+use strong deblock filter for damaged MBs
+
+‘bits_per_coded_sample integer’
+‘pred integer (encoding,video)’
+Set prediction method.
+
+Possible values:
+
+‘left’
+‘plane’
+‘median’
+‘aspect rational number (encoding,video)’
+Set sample aspect ratio.
+
+‘debug flags (decoding/encoding,audio,video,subtitles)’
+Print specific debug info.
+
+Possible values:
+
+‘pict’
+picture info
+
+‘rc’
+rate control
+
+‘bitstream’
+‘mb_type’
+macroblock (MB) type
+
+‘qp’
+per-block quantization parameter (QP)
+
+‘mv’
+motion vector
+
+‘dct_coeff’
+‘skip’
+‘startcode’
+‘pts’
+‘er’
+error recognition
+
+‘mmco’
+memory management control operations (H.264)
+
+‘bugs’
+‘vis_qp’
+visualize quantization parameter (QP), lower QP are tinted greener
+
+‘vis_mb_type’
+visualize block types
+
+‘buffers’
+picture buffer allocations
+
+‘thread_ops’
+threading operations
+
+‘vismv integer (decoding,video)’
+Visualize motion vectors (MVs).
+
+Possible values:
+
+‘pf’
+forward predicted MVs of P-frames
+
+‘bf’
+forward predicted MVs of B-frames
+
+‘bb’
+backward predicted MVs of B-frames
+
+‘cmp integer (encoding,video)’
+Set full pel me compare function.
+
+Possible values:
+
+‘sad’
+sum of absolute differences, fast (default)
+
+‘sse’
+sum of squared errors
+
+‘satd’
+sum of absolute Hadamard transformed differences
+
+‘dct’
+sum of absolute DCT transformed differences
+
+‘psnr’
+sum of squared quantization errors (avoid, low quality)
+
+‘bit’
+number of bits needed for the block
+
+‘rd’
+rate distortion optimal, slow
+
+‘zero’
+0
+
+‘vsad’
+sum of absolute vertical differences
+
+‘vsse’
+sum of squared vertical differences
+
+‘nsse’
+noise preserving sum of squared differences
+
+‘w53’
+5/3 wavelet, only used in snow
+
+‘w97’
+9/7 wavelet, only used in snow
+
+‘dctmax’
+‘chroma’
+‘subcmp integer (encoding,video)’
+Set sub pel me compare function.
+
+Possible values:
+
+‘sad’
+sum of absolute differences, fast (default)
+
+‘sse’
+sum of squared errors
+
+‘satd’
+sum of absolute Hadamard transformed differences
+
+‘dct’
+sum of absolute DCT transformed differences
+
+‘psnr’
+sum of squared quantization errors (avoid, low quality)
+
+‘bit’
+number of bits needed for the block
+
+‘rd’
+rate distortion optimal, slow
+
+‘zero’
+0
+
+‘vsad’
+sum of absolute vertical differences
+
+‘vsse’
+sum of squared vertical differences
+
+‘nsse’
+noise preserving sum of squared differences
+
+‘w53’
+5/3 wavelet, only used in snow
+
+‘w97’
+9/7 wavelet, only used in snow
+
+‘dctmax’
+‘chroma’
+‘mbcmp integer (encoding,video)’
+Set macroblock compare function.
+
+Possible values:
+
+‘sad’
+sum of absolute differences, fast (default)
+
+‘sse’
+sum of squared errors
+
+‘satd’
+sum of absolute Hadamard transformed differences
+
+‘dct’
+sum of absolute DCT transformed differences
+
+‘psnr’
+sum of squared quantization errors (avoid, low quality)
+
+‘bit’
+number of bits needed for the block
+
+‘rd’
+rate distortion optimal, slow
+
+‘zero’
+0
+
+‘vsad’
+sum of absolute vertical differences
+
+‘vsse’
+sum of squared vertical differences
+
+‘nsse’
+noise preserving sum of squared differences
+
+‘w53’
+5/3 wavelet, only used in snow
+
+‘w97’
+9/7 wavelet, only used in snow
+
+‘dctmax’
+‘chroma’
+‘ildctcmp integer (encoding,video)’
+Set interlaced dct compare function.
+
+Possible values:
+
+‘sad’
+sum of absolute differences, fast (default)
+
+‘sse’
+sum of squared errors
+
+‘satd’
+sum of absolute Hadamard transformed differences
+
+‘dct’
+sum of absolute DCT transformed differences
+
+‘psnr’
+sum of squared quantization errors (avoid, low quality)
+
+‘bit’
+number of bits needed for the block
+
+‘rd’
+rate distortion optimal, slow
+
+‘zero’
+0
+
+‘vsad’
+sum of absolute vertical differences
+
+‘vsse’
+sum of squared vertical differences
+
+‘nsse’
+noise preserving sum of squared differences
+
+‘w53’
+5/3 wavelet, only used in snow
+
+‘w97’
+9/7 wavelet, only used in snow
+
+‘dctmax’
+‘chroma’
+‘dia_size integer (encoding,video)’
+Set diamond type & size for motion estimation.
+
+‘last_pred integer (encoding,video)’
+Set amount of motion predictors from the previous frame.
+
+‘preme integer (encoding,video)’
+Set pre motion estimation.
+
+‘precmp integer (encoding,video)’
+Set pre motion estimation compare function.
+
+Possible values:
+
+‘sad’
+sum of absolute differences, fast (default)
+
+‘sse’
+sum of squared errors
+
+‘satd’
+sum of absolute Hadamard transformed differences
+
+‘dct’
+sum of absolute DCT transformed differences
+
+‘psnr’
+sum of squared quantization errors (avoid, low quality)
+
+‘bit’
+number of bits needed for the block
+
+‘rd’
+rate distortion optimal, slow
+
+‘zero’
+0
+
+‘vsad’
+sum of absolute vertical differences
+
+‘vsse’
+sum of squared vertical differences
+
+‘nsse’
+noise preserving sum of squared differences
+
+‘w53’
+5/3 wavelet, only used in snow
+
+‘w97’
+9/7 wavelet, only used in snow
+
+‘dctmax’
+‘chroma’
+‘pre_dia_size integer (encoding,video)’
+Set diamond type & size for motion estimation pre-pass.
+
+‘subq integer (encoding,video)’
+Set sub pel motion estimation quality.
+
+‘dtg_active_format integer’
+‘me_range integer (encoding,video)’
+Set limit motion vectors range (1023 for DivX player).
+
+‘ibias integer (encoding,video)’
+Set intra quant bias.
+
+‘pbias integer (encoding,video)’
+Set inter quant bias.
+
+‘color_table_id integer’
+‘global_quality integer (encoding,audio,video)’
+‘coder integer (encoding,video)’
+Possible values:
+
+‘vlc’
+variable length coder / huffman coder
+
+‘ac’
+arithmetic coder
+
+‘raw’
+raw (no encoding)
+
+‘rle’
+run-length coder
+
+‘deflate’
+deflate-based coder
+
+‘context integer (encoding,video)’
+Set context model.
+
+‘slice_flags integer’
+‘xvmc_acceleration integer’
+‘mbd integer (encoding,video)’
+Set macroblock decision algorithm (high quality mode).
+
+Possible values:
+
+‘simple’
+use mbcmp (default)
+
+‘bits’
+use fewest bits
+
+‘rd’
+use best rate distortion
+
+‘stream_codec_tag integer’
+‘sc_threshold integer (encoding,video)’
+Set scene change threshold.
+
+‘lmin integer (encoding,video)’
+Set min lagrange factor (VBR).
+
+‘lmax integer (encoding,video)’
+Set max lagrange factor (VBR).
+
+‘nr integer (encoding,video)’
+Set noise reduction.
+
+‘rc_init_occupancy integer (encoding,video)’
+Set number of bits which should be loaded into the rc buffer before decoding starts.
+
+‘inter_threshold integer (encoding,video)’
+‘flags2 flags (decoding/encoding,audio,video)’
+Possible values:
+
+‘fast’
+allow non spec compliant speedup tricks
+
+‘sgop’
+Deprecated, use mpegvideo private options instead
+
+‘noout’
+skip bitstream encoding
+
+‘local_header’
+place global headers at every keyframe instead of in extradata
+
+‘chunks’
+Frame data might be split into multiple chunks
+
+‘showall’
+Show all frames before the first keyframe
+
+‘skiprd’
+Deprecated, use mpegvideo private options instead
+
+‘error integer (encoding,video)’
+‘qns integer (encoding,video)’
+Deprecated, use mpegvideo private options instead.
+
+‘threads integer (decoding/encoding,video)’
+Possible values:
+
+‘auto’
+detect a good number of threads
+
+‘me_threshold integer (encoding,video)’
+Set motion estimation threshold.
+
+‘mb_threshold integer (encoding,video)’
+Set macroblock threshold.
+
+‘dc integer (encoding,video)’
+Set intra_dc_precision.
+
+‘nssew integer (encoding,video)’
+Set nsse weight.
+
+‘skip_top integer (decoding,video)’
+Set number of macroblock rows at the top which are skipped.
+
+‘skip_bottom integer (decoding,video)’
+Set number of macroblock rows at the bottom which are skipped.
+
+‘profile integer (encoding,audio,video)’
+Possible values:
+
+‘unknown’
+‘aac_main’
+‘aac_low’
+‘aac_ssr’
+‘aac_ltp’
+‘aac_he’
+‘aac_he_v2’
+‘aac_ld’
+‘aac_eld’
+‘dts’
+‘dts_es’
+‘dts_96_24’
+‘dts_hd_hra’
+‘dts_hd_ma’
+‘level integer (encoding,audio,video)’
+Possible values:
+
+‘unknown’
+‘lowres integer (decoding,audio,video)’
+Decode at 1= 1/2, 2=1/4, 3=1/8 resolutions.
+
+‘skip_threshold integer (encoding,video)’
+Set frame skip threshold.
+
+‘skip_factor integer (encoding,video)’
+Set frame skip factor.
+
+‘skip_exp integer (encoding,video)’
+Set frame skip exponent.
+
+‘skipcmp integer (encoding,video)’
+Set frame skip compare function.
+
+Possible values:
+
+‘sad’
+sum of absolute differences, fast (default)
+
+‘sse’
+sum of squared errors
+
+‘satd’
+sum of absolute Hadamard transformed differences
+
+‘dct’
+sum of absolute DCT transformed differences
+
+‘psnr’
+sum of squared quantization errors (avoid, low quality)
+
+‘bit’
+number of bits needed for the block
+
+‘rd’
+rate distortion optimal, slow
+
+‘zero’
+0
+
+‘vsad’
+sum of absolute vertical differences
+
+‘vsse’
+sum of squared vertical differences
+
+‘nsse’
+noise preserving sum of squared differences
+
+‘w53’
+5/3 wavelet, only used in snow
+
+‘w97’
+9/7 wavelet, only used in snow
+
+‘dctmax’
+‘chroma’
+‘border_mask float (encoding,video)’
+Increase the quantizer for macroblocks close to borders.
+
+‘mblmin integer (encoding,video)’
+Set min macroblock lagrange factor (VBR).
+
+‘mblmax integer (encoding,video)’
+Set max macroblock lagrange factor (VBR).
+
+‘mepc integer (encoding,video)’
+Set motion estimation bitrate penalty compensation (1.0 = 256).
+
+‘skip_loop_filter integer (decoding,video)’
+‘skip_idct integer (decoding,video)’
+‘skip_frame integer (decoding,video)’
+Make decoder discard processing depending on the frame type selected by the option value.
+
+‘skip_loop_filter’ skips frame loop filtering, ‘skip_idct’ skips frame IDCT/dequantization, ‘skip_frame’ skips decoding.
+
+Possible values:
+
+‘none’
+Discard no frame.
+
+‘default’
+Discard useless frames like 0-sized frames.
+
+‘noref’
+Discard all non-reference frames.
+
+‘bidir’
+Discard all bidirectional frames.
+
+‘nokey’
+Discard all frames excepts keyframes.
+
+‘all’
+Discard all frames.
+
+Default value is ‘default’.
+
+‘bidir_refine integer (encoding,video)’
+Refine the two motion vectors used in bidirectional macroblocks.
+
+‘brd_scale integer (encoding,video)’
+Downscale frames for dynamic B-frame decision.
+
+‘keyint_min integer (encoding,video)’
+Set minimum interval between IDR-frames.
+
+‘refs integer (encoding,video)’
+Set reference frames to consider for motion compensation.
+
+‘chromaoffset integer (encoding,video)’
+Set chroma qp offset from luma.
+
+‘trellis integer (encoding,audio,video)’
+Set rate-distortion optimal quantization.
+
+‘sc_factor integer (encoding,video)’
+Set value multiplied by qscale for each frame and added to scene_change_score.
+
+‘mv0_threshold integer (encoding,video)’
+‘b_sensitivity integer (encoding,video)’
+Adjust sensitivity of b_frame_strategy 1.
+
+‘compression_level integer (encoding,audio,video)’
+‘min_prediction_order integer (encoding,audio)’
+‘max_prediction_order integer (encoding,audio)’
+‘timecode_frame_start integer (encoding,video)’
+Set GOP timecode frame start number, in non drop frame format.
+
+‘request_channels integer (decoding,audio)’
+Set desired number of audio channels.
+
+‘bits_per_raw_sample integer’
+‘channel_layout integer (decoding/encoding,audio)’
+Possible values:
+
+‘request_channel_layout integer (decoding,audio)’
+Possible values:
+
+‘rc_max_vbv_use float (encoding,video)’
+‘rc_min_vbv_use float (encoding,video)’
+‘ticks_per_frame integer (decoding/encoding,audio,video)’
+‘color_primaries integer (decoding/encoding,video)’
+‘color_trc integer (decoding/encoding,video)’
+‘colorspace integer (decoding/encoding,video)’
+‘color_range integer (decoding/encoding,video)’
+‘chroma_sample_location integer (decoding/encoding,video)’
+‘log_level_offset integer’
+Set the log level offset.
+
+‘slices integer (encoding,video)’
+Number of slices, used in parallelized encoding.
+
+‘thread_type flags (decoding/encoding,video)’
+Select multithreading type.
+
+Possible values:
+
+‘slice’
+‘frame’
+‘audio_service_type integer (encoding,audio)’
+Set audio service type.
+
+Possible values:
+
+‘ma’
+Main Audio Service
+
+‘ef’
+Effects
+
+‘vi’
+Visually Impaired
+
+‘hi’
+Hearing Impaired
+
+‘di’
+Dialogue
+
+‘co’
+Commentary
+
+‘em’
+Emergency
+
+‘vo’
+Voice Over
+
+‘ka’
+Karaoke
+
+‘request_sample_fmt sample_fmt (decoding,audio)’
+Set sample format audio decoders should prefer. Default value is none.
+
+‘pkt_timebase rational number’
+‘sub_charenc encoding (decoding,subtitles)’
+Set the input subtitles character encoding.
