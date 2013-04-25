@@ -1,0 +1,11 @@
+5.12 Preset files
+
+A preset file contains a sequence of option=value pairs, one for each line, specifying a sequence of options which would be awkward to specify on the command line. Lines starting with the hash (’#’) character are ignored and are used to provide comments. Check the ‘presets’ directory in the FFmpeg source tree for examples.
+
+Preset files are specified with the vpre, apre, spre, and fpre options. The fpre option takes the filename of the preset instead of a preset name as input and can be used for any kind of codec. For the vpre, apre, and spre options, the options specified in a preset file are applied to the currently selected codec of the same type as the preset option.
+
+The argument passed to the vpre, apre, and spre preset options identifies the preset file to use according to the following rules:
+
+First ffmpeg searches for a file named arg.ffpreset in the directories ‘$FFMPEG_DATADIR’ (if set), and ‘$HOME/.ffmpeg’, and in the datadir defined at configuration time (usually ‘PREFIX/share/ffmpeg’) or in a ‘ffpresets’ folder along the executable on win32, in that order. For example, if the argument is libvpx-1080p, it will search for the file ‘libvpx-1080p.ffpreset’.
+
+If no such file is found, then ffmpeg will search for a file named codec_name-arg.ffpreset in the above-mentioned directories, where codec_name is the name of the codec to which the preset file options will be applied. For example, if you select the video codec with -vcodec libvpx and use -vpre 1080p, then it will search for the file ‘libvpx-1080p.ffpreset’.
