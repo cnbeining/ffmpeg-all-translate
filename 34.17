@@ -1,0 +1,30 @@
+34.17 aphaser
+
+Add a phasing effect to the input audio.
+
+A phaser filter creates series of peaks and troughs in the frequency spectrum. The position of the peaks and troughs are modulated so that they vary over time, creating a sweeping effect.
+
+A description of the accepted parameters follows.
+
+‘in_gain’
+Set input gain. Default is 0.4.
+
+‘out_gain’
+Set output gain. Default is 0.74
+
+‘delay’
+Set delay in milliseconds. Default is 3.0.
+
+‘decay’
+Set decay. Default is 0.4.
+
+‘speed’
+Set modulation speed in Hz. Default is 0.5.
+
+‘type’
+Set modulation type. Default is triangular.
+
+It accepts the following values:
+
+‘triangular, t’
+‘sinusoidal, s’
