@@ -1,0 +1,37 @@
+34.21 ashowinfo
+
+Show a line containing various information for each input audio frame. The input audio is not modified.
+
+The shown line contains a sequence of key/value pairs of the form key:value.
+
+A description of each shown parameter follows:
+
+‘n’
+sequential number of the input frame, starting from 0
+
+‘pts’
+Presentation timestamp of the input frame, in time base units; the time base depends on the filter input pad, and is usually 1/sample_rate.
+
+‘pts_time’
+presentation timestamp of the input frame in seconds
+
+‘pos’
+position of the frame in the input stream, -1 if this information in unavailable and/or meaningless (for example in case of synthetic audio)
+
+‘fmt’
+sample format
+
+‘chlayout’
+channel layout
+
+‘rate’
+sample rate for the audio frame
+
+‘nb_samples’
+number of samples (per channel) in the frame
+
+‘checksum’
+Adler-32 checksum (printed in hexadecimal) of the audio data. For planar audio the data is treated as if all the planes were concatenated.
+
+‘plane_checksums’
+A list of Adler-32 checksums for each data plane.
