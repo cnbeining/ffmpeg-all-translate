@@ -1,0 +1,7 @@
+26.6.2 Examples
+Grab and show the input of a FireWire DV/HDV device.
+   
+ffplay -f iec61883 -i auto
+Grab and record the input of a FireWire DV/HDV device, using a packet buffer of 100000 packets if the source is HDV.
+ 	
+ffmpeg -f iec61883 -i auto -hdvbuffer 100000 out.mpg
