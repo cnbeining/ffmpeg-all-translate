@@ -1,0 +1,35 @@
+26.16.1 Options
+‘draw_mouse’
+Specify whether to draw the mouse pointer. A value of 0 specify not to draw the pointer. Default value is 1.
+
+‘follow_mouse’
+Make the grabbed area follow the mouse. The argument can be centered or a number of pixels PIXELS.
+
+When it is specified with "centered", the grabbing region follows the mouse pointer and keeps the pointer at the center of region; otherwise, the region follows only when the mouse pointer reaches within PIXELS (greater than zero) to the edge of region.
+
+For example:
+
+   
+ffmpeg -f x11grab -follow_mouse centered -r 25 -s cif -i :0.0 out.mpg
+To follow only when the mouse pointer reaches within 100 pixels to edge:
+
+ 	
+ffmpeg -f x11grab -follow_mouse 100 -r 25 -s cif -i :0.0 out.mpg
+‘framerate’
+Set the grabbing frame rate. Default value is ntsc, corresponding to a frame rate of 30000/1001.
+
+‘show_region’
+Show grabbed region on screen.
+
+If show_region is specified with 1, then the grabbing region will be indicated on screen. With this option, it is easy to know what is being grabbed if only a portion of the screen is grabbed.
+
+For example:
+
+ 	
+ffmpeg -f x11grab -show_region 1 -r 25 -s cif -i :0.0+10,20 out.mpg
+With follow_mouse:
+
+ 	
+ffmpeg -f x11grab -follow_mouse centered -show_region 1 -r 25 -s cif -i :0.0 out.mpg
+‘video_size’
+Set the video frame size. Default value is vga.
