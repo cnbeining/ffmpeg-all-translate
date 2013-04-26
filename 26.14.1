@@ -1,0 +1,56 @@
+26.14.1 Options
+‘standard’
+Set the standard. Must be the name of a supported standard. To get a list of the supported standards, use the ‘list_standards’ option.
+
+‘channel’
+Set the input channel number. Default to -1, which means using the previously selected channel.
+
+‘video_size’
+Set the video frame size. The argument must be a string in the form WIDTHxHEIGHT or a valid size abbreviation.
+
+‘pixel_format’
+Select the pixel format (only valid for raw video input).
+
+‘input_format’
+Set the preferred pixel format (for raw video) or a codec name. This option allows to select the input format, when several are available.
+
+‘framerate’
+Set the preferred video frame rate.
+
+‘list_formats’
+List available formats (supported pixel formats, codecs, and frame sizes) and exit.
+
+Available values are:
+
+‘all’
+Show all available (compressed and non-compressed) formats.
+
+‘raw’
+Show only raw video (non-compressed) formats.
+
+‘compressed’
+Show only compressed formats.
+
+‘list_standards’
+List supported standards and exit.
+
+Available values are:
+
+‘all’
+Show all supported standards.
+
+‘timestamps, ts’
+Set type of timestamps for grabbed frames.
+
+Available values are:
+
+‘default’
+Use timestamps from the kernel.
+
+‘abs’
+Use absolute timestamps (wall clock).
+
+‘mono2abs’
+Force conversion from monotonic to absolute timestamps.
+
+Default value is default.
