@@ -1,0 +1,41 @@
+17.1.1.4 Other Metadata Options
+
+‘-copyright boolean’
+Copyright Indicator. Specifies whether a copyright exists for this audio.
+
+‘0’
+‘off’
+No Copyright Exists (default)
+
+‘1’
+‘on’
+Copyright Exists
+
+‘-dialnorm value’
+Dialogue Normalization. Indicates how far the average dialogue level of the program is below digital 100% full scale (0 dBFS). This parameter determines a level shift during audio reproduction that sets the average volume of the dialogue to a preset level. The goal is to match volume level between program sources. A value of -31dB will result in no volume level change, relative to the source volume, during audio reproduction. Valid values are whole numbers in the range -31 to -1, with -31 being the default.
+
+‘-dsur_mode mode’
+Dolby Surround Mode. Specifies whether the stereo signal uses Dolby Surround (Pro Logic). This field will only be written to the bitstream if the audio stream is stereo. Using this option does NOT mean the encoder will actually apply Dolby Surround processing.
+
+‘0’
+‘notindicated’
+Not Indicated (default)
+
+‘1’
+‘off’
+Not Dolby Surround Encoded
+
+‘2’
+‘on’
+Dolby Surround Encoded
+
+‘-original boolean’
+Original Bit Stream Indicator. Specifies whether this audio is from the original source and not a copy.
+
+‘0’
+‘off’
+Not Original Source
+
+‘1’
+‘on’
+Original Source (default)
