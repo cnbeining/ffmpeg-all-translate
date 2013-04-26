@@ -1,0 +1,19 @@
+22.4 hls
+
+Apple HTTP Live Streaming muxer that segments MPEG-TS according to the HTTP Live Streaming specification.
+
+It creates a playlist file and numbered segment files. The output filename specifies the playlist filename; the segment filenames receive the same basename as the playlist, a sequential number and a .ts extension.
+
+   
+ffmpeg -i in.nut out.m3u8
+‘-hls_time seconds’
+Set the segment length in seconds.
+
+‘-hls_list_size size’
+Set the maximum number of playlist entries.
+
+‘-hls_wrap wrap’
+Set the number after which index wraps.
+
+‘-start_number number’
+Start the sequence from number.
