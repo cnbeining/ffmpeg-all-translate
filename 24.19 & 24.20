@@ -1,0 +1,64 @@
+24.19 rtp
+
+Real-Time Protocol.
+
+24.20 rtsp
+
+RTSP is not technically a protocol handler in libavformat, it is a demuxer and muxer. The demuxer supports both normal RTSP (with data transferred over RTP; this is used by e.g. Apple and Microsoft) and Real-RTSP (with data transferred over RDT).
+
+The muxer can be used to send a stream using RTSP ANNOUNCE to a server supporting it (currently Darwin Streaming Server and Mischa Spiegelmock’s RTSP server).
+
+The required syntax for a RTSP url is:
+
+   
+rtsp://hostname[:port]/path
+The following options (set on the ffmpeg/ffplay command line, or set in code via AVOptions or in avformat_open_input), are supported:
+
+Flags for rtsp_transport:
+
+‘udp’
+Use UDP as lower transport protocol.
+
+‘tcp’
+Use TCP (interleaving within the RTSP control channel) as lower transport protocol.
+
+‘udp_multicast’
+Use UDP multicast as lower transport protocol.
+
+‘http’
+Use HTTP tunneling as lower transport protocol, which is useful for passing proxies.
+
+Multiple lower transport protocols may be specified, in that case they are tried one at a time (if the setup of one fails, the next one is tried). For the muxer, only the tcp and udp options are supported.
+
+Flags for rtsp_flags:
+
+‘filter_src’
+Accept packets only from negotiated peer address and port.
+
+‘listen’
+Act as a server, listening for an incoming connection.
+
+When receiving data over UDP, the demuxer tries to reorder received packets (since they may arrive out of order, or packets may get lost totally). This can be disabled by setting the maximum demuxing delay to zero (via the max_delay field of AVFormatContext).
+
+When watching multi-bitrate Real-RTSP streams with ffplay, the streams to display can be chosen with -vst n and -ast n for video and audio respectively, and can be switched on the fly by pressing v and a.
+
+Example command lines:
+
+To watch a stream over UDP, with a max reordering delay of 0.5 seconds:
+
+ 	
+ffplay -max_delay 500000 -rtsp_transport udp rtsp://server/video.mp4
+To watch a stream tunneled over HTTP:
+
+ 	
+ffplay -rtsp_transport http rtsp://server/video.mp4
+To send a stream in realtime to a RTSP server, for others to watch:
+
+ 	
+ffmpeg -re -i input -f rtsp -muxdelay 0.1 rtsp://server/live.sdp
+To receive a stream in realtime:
+
+ 	
+ffmpeg -rtsp_flags listen -i rtsp://ownaddress/live.sdp output
+‘stimeout’
+Socket IO timeout in micro seconds.
