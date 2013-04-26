@@ -1,0 +1,7 @@
+34.22.1 Examples
+Stress-test amerge by randomly sending buffers on the wrong input, while avoiding too much of a desynchronization:
+
+   
+amovie=file.ogg [a] ; amovie=file.mp3 [b] ;
+[a] [b] astreamsync=(2*random(1))-1+tanh(5*(t1-t2)) [a2] [b2] ;
+[a2] [b2] amerge
