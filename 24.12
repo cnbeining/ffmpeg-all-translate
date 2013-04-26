@@ -1,0 +1,78 @@
+24.12 rtmp
+
+Real-Time Messaging Protocol.
+
+The Real-Time Messaging Protocol (RTMP) is used for streaming multimedia content across a TCP/IP network.
+
+The required syntax is:
+
+   
+rtmp://server[:port][/app][/instance][/playpath]
+The accepted parameters are:
+
+‘server’
+The address of the RTMP server.
+
+‘port’
+The number of the TCP port to use (by default is 1935).
+
+‘app’
+It is the name of the application to access. It usually corresponds to the path where the application is installed on the RTMP server (e.g. ‘/ondemand/’, ‘/flash/live/’, etc.). You can override the value parsed from the URI through the rtmp_app option, too.
+
+‘playpath’
+It is the path or name of the resource to play with reference to the application specified in app, may be prefixed by "mp4:". You can override the value parsed from the URI through the rtmp_playpath option, too.
+
+‘listen’
+Act as a server, listening for an incoming connection.
+
+‘timeout’
+Maximum time to wait for the incoming connection. Implies listen.
+
+Additionally, the following parameters can be set via command line options (or in code via AVOptions):
+
+‘rtmp_app’
+Name of application to connect on the RTMP server. This option overrides the parameter specified in the URI.
+
+‘rtmp_buffer’
+Set the client buffer time in milliseconds. The default is 3000.
+
+‘rtmp_conn’
+Extra arbitrary AMF connection parameters, parsed from a string, e.g. like B:1 S:authMe O:1 NN:code:1.23 NS:flag:ok O:0. Each value is prefixed by a single character denoting the type, B for Boolean, N for number, S for string, O for object, or Z for null, followed by a colon. For Booleans the data must be either 0 or 1 for FALSE or TRUE, respectively. Likewise for Objects the data must be 0 or 1 to end or begin an object, respectively. Data items in subobjects may be named, by prefixing the type with ’N’ and specifying the name before the value (i.e. NB:myFlag:1). This option may be used multiple times to construct arbitrary AMF sequences.
+
+‘rtmp_flashver’
+Version of the Flash plugin used to run the SWF player. The default is LNX 9,0,124,2.
+
+‘rtmp_flush_interval’
+Number of packets flushed in the same request (RTMPT only). The default is 10.
+
+‘rtmp_live’
+Specify that the media is a live stream. No resuming or seeking in live streams is possible. The default value is any, which means the subscriber first tries to play the live stream specified in the playpath. If a live stream of that name is not found, it plays the recorded stream. The other possible values are live and recorded.
+
+‘rtmp_pageurl’
+URL of the web page in which the media was embedded. By default no value will be sent.
+
+‘rtmp_playpath’
+Stream identifier to play or to publish. This option overrides the parameter specified in the URI.
+
+‘rtmp_subscribe’
+Name of live stream to subscribe to. By default no value will be sent. It is only sent if the option is specified or if rtmp_live is set to live.
+
+‘rtmp_swfhash’
+SHA256 hash of the decompressed SWF file (32 bytes).
+
+‘rtmp_swfsize’
+Size of the decompressed SWF file, required for SWFVerification.
+
+‘rtmp_swfurl’
+URL of the SWF player for the media. By default no value will be sent.
+
+‘rtmp_swfverify’
+URL to player swf file, compute hash/size automatically.
+
+‘rtmp_tcurl’
+URL of the target stream. Defaults to proto://host[:port]/app.
+
+For example to read with ffplay a multimedia resource named "sample" from the application "vod" from an RTMP server "myserver":
+
+ 	
+ffplay rtmp://myserver/vod/sample
