@@ -1,0 +1,9 @@
+19. Bitstream Filters
+
+When you configure your FFmpeg build, all the supported bitstream filters are enabled by default. You can list all available ones using the configure option --list-bsfs.
+
+You can disable all the bitstream filters using the configure option --disable-bsfs, and selectively enable any bitstream filter using the option --enable-bsf=BSF, or you can disable a particular bitstream filter using the option --disable-bsf=BSF.
+
+The option -bsfs of the ff* tools will display the list of all the supported bitstream filters included in your build.
+
+Below is a description of the currently available bitstream filters.
