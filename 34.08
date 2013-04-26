@@ -1,0 +1,26 @@
+34.8 bandreject
+
+Apply a two-pole Butterworth band-reject filter with central frequency frequency, and (3dB-point) band-width width. The filter roll off at 6dB per octave (20dB per decade).
+
+The filter accepts the following options:
+
+‘frequency, f’
+Set the filter’s central frequency. Default is 3000.
+
+‘width_type’
+Set method to specify band-width of filter.
+
+‘h’
+Hz
+
+‘q’
+Q-Factor
+
+‘o’
+octave
+
+‘s’
+slope
+
+‘width, w’
+Specify the band-width of a filter in width_type units.
