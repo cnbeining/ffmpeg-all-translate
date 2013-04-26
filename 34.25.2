@@ -1,0 +1,23 @@
+34.25.2 Remapping examples
+The channel remapping will be effective if, and only if:
+
+gain coefficients are zeroes or ones,
+only one input per channel output,
+If all these conditions are satisfied, the filter will notify the user ("Pure channel mapping detected"), and use an optimized and lossless method to do the remapping.
+
+For example, if you have a 5.1 source and want a stereo audio stream by dropping the extra channels:
+
+   
+pan="stereo: c0=FL : c1=FR"
+Given the same source, you can also switch front left and front right channels and keep the input channel layout:
+
+ 	
+pan="5.1: c0=c1 : c1=c0 : c2=c2 : c3=c3 : c4=c4 : c5=c5"
+If the input is a stereo audio stream, you can mute the front left channel (and still keep the stereo channel layout) with:
+
+ 	
+pan="stereo:c1=c1"
+Still with a stereo audio stream input, you can copy the right channel in both front left and right:
+
+ 	
+pan="stereo: c0=FR : c1=FR"
