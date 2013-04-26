@@ -1,0 +1,9 @@
+26.6 iec61883
+
+FireWire DV/HDV input device using libiec61883.
+
+To enable this input device, you need libiec61883, libraw1394 and libavc1394 installed on your system. Use the configure option --enable-libiec61883 to compile with the device enabled.
+
+The iec61883 capture device supports capturing from a video device connected via IEEE1394 (FireWire), using libiec61883 and the new Linux FireWire stack (juju). This is the default DV/HDV input method in Linux Kernel 2.6.37 and later, since the old FireWire stack was removed.
+
+Specify the FireWire port to be used as input file, or "auto" to choose the first port connected.
