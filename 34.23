@@ -1,0 +1,13 @@
+34.23 atempo
+
+Adjust audio tempo.
+
+The filter accepts exactly one parameter, the audio tempo. If not specified then the filter will assume nominal 1.0 tempo. Tempo must be in the [0.5, 2.0] range.
+
+34.23.1 Examples
+Slow down audio to 80% tempo:
+   
+atempo=0.8
+To speed up audio to 125% tempo:
+ 	
+atempo=1.25
