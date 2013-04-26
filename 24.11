@@ -1,0 +1,25 @@
+24.11 pipe
+
+UNIX pipe access protocol.
+
+Allow to read and write from UNIX pipes.
+
+The accepted syntax is:
+
+   
+pipe:[number]
+number is the number corresponding to the file descriptor of the pipe (e.g. 0 for stdin, 1 for stdout, 2 for stderr). If number is not specified, by default the stdout file descriptor will be used for writing, stdin for reading.
+
+For example to read from stdin with ffmpeg:
+
+ 	
+cat test.wav | ffmpeg -i pipe:0
+# ...this is the same as...
+cat test.wav | ffmpeg -i pipe:
+For writing to stdout with ffmpeg:
+
+ 	
+ffmpeg -i test.wav -f avi pipe:1 | cat > test.avi
+# ...this is the same as...
+ffmpeg -i test.wav -f avi pipe: | cat > test.avi
+Note that some formats (typically MOV), require the output protocol to be seekable, so they will fail with the pipe output protocol.
