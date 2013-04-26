@@ -1,0 +1,17 @@
+26.2 bktr
+
+BSD video input device.
+
+26.3 dshow
+
+Windows DirectShow input device.
+
+DirectShow support is enabled when FFmpeg is built with the mingw-w64 project. Currently only audio and video devices are supported.
+
+Multiple devices may be opened as separate inputs, but they may also be opened on the same input, which should improve synchronism between them.
+
+The input name should be in the format:
+
+   
+TYPE=NAME[:TYPE=NAME]
+where TYPE can be either audio or video, and NAME is the device’s name.
