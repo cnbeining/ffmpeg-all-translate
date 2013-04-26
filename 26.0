@@ -1,0 +1,11 @@
+26. Input Devices
+
+Input devices are configured elements in FFmpeg which allow to access the data coming from a multimedia device attached to your system.
+
+When you configure your FFmpeg build, all the supported input devices are enabled by default. You can list all available ones using the configure option "–list-indevs".
+
+You can disable all the input devices using the configure option "–disable-indevs", and selectively enable an input device using the option "–enable-indev=INDEV", or you can disable a particular input device using the option "–disable-indev=INDEV".
+
+The option "-formats" of the ff* tools will display the list of supported input devices (amongst the demuxers).
+
+A description of the currently available input devices follows.
