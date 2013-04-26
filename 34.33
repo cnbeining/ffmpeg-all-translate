@@ -1,0 +1,9 @@
+34.33 volumedetect
+
+Detect the volume of the input video.
+
+The filter has no parameters. The input is not modified. Statistics about the volume will be printed in the log when the input stream end is reached.
+
+In particular it will show the mean volume (root mean square), maximum volume (on a per-sample basis), and the beginning of an histogram of the registered volume values (from the maximum value to a cumulated 1/1000 of the samples).
+
+All volumes are in decibels relative to the maximum PCM value.
