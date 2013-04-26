@@ -1,0 +1,11 @@
+22. Muxers
+
+Muxers are configured elements in FFmpeg which allow writing multimedia streams to a particular type of file.
+
+When you configure your FFmpeg build, all the supported muxers are enabled by default. You can list all available muxers using the configure option --list-muxers.
+
+You can disable all the muxers with the configure option --disable-muxers and selectively enable / disable single muxers with the options --enable-muxer=MUXER / --disable-muxer=MUXER.
+
+The option -formats of the ff* tools will display the list of enabled muxers.
+
+A description of some of the currently available muxers follows.
