@@ -1,0 +1,35 @@
+26.7 jack
+
+JACK input device.
+
+To enable this input device during configuration you need libjack installed on your system.
+
+A JACK input device creates one or more JACK writable clients, one for each audio channel, with name client_name:input_N, where client_name is the name provided by the application, and N is a number which identifies the channel. Each writable client will send the acquired data to the FFmpeg input device.
+
+Once you have created one or more JACK readable clients, you need to connect them to one or more JACK writable clients.
+
+To connect or disconnect JACK clients you can use the jack_connect and jack_disconnect programs, or do it through a graphical interface, for example with qjackctl.
+
+To list the JACK clients and their properties you can invoke the command jack_lsp.
+
+Follows an example which shows how to capture a JACK readable client with ffmpeg.
+
+   
+# Create a JACK writable client with name "ffmpeg".
+$ ffmpeg -f jack -i ffmpeg -y out.wav
+
+# Start the sample jack_metro readable client.
+$ jack_metro -b 120 -d 0.2 -f 4000
+
+# List the current JACK clients.
+$ jack_lsp -c
+system:capture_1
+system:capture_2
+system:playback_1
+system:playback_2
+ffmpeg:input_1
+metro:120_bpm
+
+# Connect metro to the ffmpeg writable client.
+$ jack_connect metro:120_bpm ffmpeg:input_1
+For more information read: http://jackaudio.org/
