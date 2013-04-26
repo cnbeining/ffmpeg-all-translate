@@ -1,0 +1,29 @@
+34.7 bandpass
+
+Apply a two-pole Butterworth band-pass filter with central frequency frequency, and (3dB-point) band-width width. The csg option selects a constant skirt gain (peak gain = Q) instead of the default: constant 0dB peak gain. The filter roll off at 6dB per octave (20dB per decade).
+
+The filter accepts the following options:
+
+‘frequency, f’
+Set the filter’s central frequency. Default is 3000.
+
+‘csg’
+Constant skirt gain if set to 1. Defaults to 0.
+
+‘width_type’
+Set method to specify band-width of filter.
+
+‘h’
+Hz
+
+‘q’
+Q-Factor
+
+‘o’
+octave
+
+‘s’
+slope
+
+‘width, w’
+Specify the band-width of a filter in width_type units.
