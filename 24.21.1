@@ -1,0 +1,33 @@
+24.21.1 Muxer
+The syntax for a SAP url given to the muxer is:
+
+   
+sap://destination[:port][?options]
+The RTP packets are sent to destination on port port, or to port 5004 if no port is specified. options is a &-separated list. The following options are supported:
+
+‘announce_addr=address’
+Specify the destination IP address for sending the announcements to. If omitted, the announcements are sent to the commonly used SAP announcement multicast address 224.2.127.254 (sap.mcast.net), or ff0e::2:7ffe if destination is an IPv6 address.
+
+‘announce_port=port’
+Specify the port to send the announcements on, defaults to 9875 if not specified.
+
+‘ttl=ttl’
+Specify the time to live value for the announcements and RTP packets, defaults to 255.
+
+‘same_port=0|1’
+If set to 1, send all RTP streams on the same port pair. If zero (the default), all streams are sent on unique ports, with each stream on a port 2 numbers higher than the previous. VLC/Live555 requires this to be set to 1, to be able to receive the stream. The RTP stack in libavformat for receiving requires all streams to be sent on unique ports.
+
+Example command lines follow.
+
+To broadcast a stream on the local subnet, for watching in VLC:
+
+ 	
+ffmpeg -re -i input -f sap sap://224.0.0.255?same_port=1
+Similarly, for watching in ffplay:
+
+ 	
+ffmpeg -re -i input -f sap sap://224.0.0.255
+And for watching in ffplay, over IPv6:
+
+ 	
+ffmpeg -re -i input -f sap sap://[ff0e::1:2:3:4]
