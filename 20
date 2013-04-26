@@ -1,0 +1,126 @@
+20. Format Options
+
+The libavformat library provides some generic global options, which can be set on all the muxers and demuxers. In addition each muxer or demuxer may support so-called private options, which are specific for that component.
+
+Options may be set by specifying -option value in the FFmpeg tools, or by setting the value explicitly in the AVFormatContext options or using the ‘libavutil/opt.h’ API for programmatic use.
+
+The list of supported options follows:
+
+‘avioflags flags (input/output)’
+Possible values:
+
+‘direct’
+Reduce buffering.
+
+‘probesize integer (input)’
+Set probing size in bytes, i.e. the size of the data to analyze to get stream information. A higher value will allow to detect more information in case it is dispersed into the stream, but will increase latency. Must be an integer not lesser than 32. It is 5000000 by default.
+
+‘packetsize integer (output)’
+Set packet size.
+
+‘fflags flags (input/output)’
+Set format flags.
+
+Possible values:
+
+‘ignidx’
+Ignore index.
+
+‘genpts’
+Generate PTS.
+
+‘nofillin’
+Do not fill in missing values that can be exactly calculated.
+
+‘noparse’
+Disable AVParsers, this needs +nofillin too.
+
+‘igndts’
+Ignore DTS.
+
+‘discardcorrupt’
+Discard corrupted frames.
+
+‘sortdts’
+Try to interleave output packets by DTS.
+
+‘keepside’
+Do not merge side data.
+
+‘latm’
+Enable RTP MP4A-LATM payload.
+
+‘nobuffer’
+Reduce the latency introduced by optional buffering
+
+‘analyzeduration integer (input)’
+Specify how many microseconds are analyzed to probe the input. A higher value will allow to detect more accurate information, but will increase latency. It defaults to 5,000,000 microseconds = 5 seconds.
+
+‘cryptokey hexadecimal string (input)’
+Set decryption key.
+
+‘indexmem integer (input)’
+Set max memory used for timestamp index (per stream).
+
+‘rtbufsize integer (input)’
+Set max memory used for buffering real-time frames.
+
+‘fdebug flags (input/output)’
+Print specific debug info.
+
+Possible values:
+
+‘ts’
+‘max_delay integer (input/output)’
+Set maximum muxing or demuxing delay in microseconds.
+
+‘fpsprobesize integer (input)’
+Set number of frames used to probe fps.
+
+‘audio_preload integer (output)’
+Set microseconds by which audio packets should be interleaved earlier.
+
+‘chunk_duration integer (output)’
+Set microseconds for each chunk.
+
+‘chunk_size integer (output)’
+Set size in bytes for each chunk.
+
+‘err_detect, f_err_detect flags (input)’
+Set error detection flags. f_err_detect is deprecated and should be used only via the ffmpeg tool.
+
+Possible values:
+
+‘crccheck’
+Verify embedded CRCs.
+
+‘bitstream’
+Detect bitstream specification deviations.
+
+‘buffer’
+Detect improper bitstream length.
+
+‘explode’
+Abort decoding on minor error detection.
+
+‘careful’
+Consider things that violate the spec and have not been seen in the wild as errors.
+
+‘compliant’
+Consider all spec non compliancies as errors.
+
+‘aggressive’
+Consider things that a sane encoder should not do as an error.
+
+‘use_wallclock_as_timestamps integer (input)’
+Use wallclock as timestamps.
+
+‘avoid_negative_ts integer (output)’
+Shift timestamps to make them positive. A value of 1 enables shifting, a value of 0 disables it, the default value of -1 enables shifting when required by the target format.
+
+When shifting is enabled, all output timestamps are shifted by the same amount. Audio, video, and subtitles desynching and relative timestamp differences are preserved compared to how they would have been without shifting.
+
+Also note that this affects only leading negative timestamps, and not non-monotonic negative timestamps.
+
+‘flush_packets integer (output)’
+Flush the underlying I/O stream after each packet. Default 1 enables it, and has the effect of reducing the latency; 0 disables it and may slightly increase performance in some cases.
