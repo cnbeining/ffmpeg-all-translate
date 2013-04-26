@@ -1,0 +1,15 @@
+21.7 tedcaptions
+
+JSON captions used for TED Talks.
+
+TED does not provide links to the captions, but they can be guessed from the page. The file ‘tools/bookmarklets.html’ from the FFmpeg source tree contains a bookmarklet to expose them.
+
+This demuxer accepts the following option:
+
+‘start_time’
+Set the start time of the TED talk, in milliseconds. The default is 15000 (15s). It is used to sync the captions with the downloadable videos, because they include a 15s intro.
+
+Example: convert the captions to a format most players understand:
+
+   
+ffmpeg -i http://www.ted.com/talks/subtitles/id/1/lang/en talk1-en.srt
