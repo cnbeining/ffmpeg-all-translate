@@ -1,0 +1,31 @@
+34.10 equalizer
+
+Apply a two-pole peaking equalisation (EQ) filter. With this filter, the signal-level at and around a selected frequency can be increased or decreased, whilst (unlike bandpass and bandreject filters) that at all other frequencies is unchanged.
+
+In order to produce complex equalisation curves, this filter can be given several times, each with a different central frequency.
+
+The filter accepts the following options:
+
+‘frequency, f’
+Set the filter’s central frequency in Hz.
+
+‘width_type’
+Set method to specify band-width of filter.
+
+‘h’
+Hz
+
+‘q’
+Q-Factor
+
+‘o’
+octave
+
+‘s’
+slope
+
+‘width, w’
+Specify the band-width of a filter in width_type units.
+
+‘gain, g’
+Set the required gain or attenuation in dB. Beware of clipping when using a positive gain.
