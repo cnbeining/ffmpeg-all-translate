@@ -1,0 +1,28 @@
+31. graph2dot
+
+The ‘graph2dot’ program included in the FFmpeg ‘tools’ directory can be used to parse a filtergraph description and issue a corresponding textual representation in the dot language.
+
+Invoke the command:
+
+   
+graph2dot -h
+to see how to use ‘graph2dot’.
+
+You can then pass the dot description to the ‘dot’ program (from the graphviz suite of programs) and obtain a graphical representation of the filtergraph.
+
+For example the sequence of commands:
+
+ 	
+echo GRAPH_DESCRIPTION | \
+tools/graph2dot -o graph.tmp && \
+dot -Tpng graph.tmp -o graph.png && \
+display graph.png
+can be used to create and display an image representing the graph described by the GRAPH_DESCRIPTION string. Note that this string must be a complete self-contained graph, with its inputs and outputs explicitly defined. For example if your command line is of the form:
+
+ 	
+ffmpeg -i infile -vf scale=640:360 outfile
+your GRAPH_DESCRIPTION string will need to be of the form:
+
+ 	
+nullsrc,scale=640:360,nullsink
+you may also need to set the nullsrc parameters and add a format filter in order to simulate a specific input file.
