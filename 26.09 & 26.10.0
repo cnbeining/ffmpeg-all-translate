@@ -1,0 +1,26 @@
+26.9 libdc1394
+
+IIDC1394 input device, based on libdc1394 and libraw1394.
+
+26.10 openal
+
+The OpenAL input device provides audio capture on all systems with a working OpenAL 1.1 implementation.
+
+To enable this input device during configuration, you need OpenAL headers and libraries installed on your system, and need to configure FFmpeg with --enable-openal.
+
+OpenAL headers and libraries should be provided as part of your OpenAL implementation, or as an additional download (an SDK). Depending on your installation you may need to specify additional flags via the --extra-cflags and --extra-ldflags for allowing the build system to locate the OpenAL headers and libraries.
+
+An incomplete list of OpenAL implementations follows:
+
+Creative
+The official Windows implementation, providing hardware acceleration with supported devices and software fallback. See http://openal.org/.
+
+OpenAL Soft
+Portable, open source (LGPL) software implementation. Includes backends for the most common sound APIs on the Windows, Linux, Solaris, and BSD operating systems. See http://kcat.strangesoft.net/openal.html.
+
+Apple
+OpenAL is part of Core Audio, the official Mac OS X Audio interface. See http://developer.apple.com/technologies/mac/audio-and-video.html
+
+This device allows to capture from an audio input device handled through OpenAL.
+
+You need to specify the name of the device to capture in the provided filename. If the empty string is provided, the device will automatically select the default device. You can get the list of the supported devices by using the option list_devices.
