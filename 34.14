@@ -1,0 +1,29 @@
+34.14 amix
+
+Mixes multiple audio inputs into a single output.
+
+For example
+
+   
+ffmpeg -i INPUT1 -i INPUT2 -i INPUT3 -filter_complex amix=inputs=3:duration=first:dropout_transition=3 OUTPUT
+will mix 3 input audio streams to a single output with the same duration as the first input and a dropout transition time of 3 seconds.
+
+The filter accepts the following named parameters:
+
+‘inputs’
+Number of inputs. If unspecified, it defaults to 2.
+
+‘duration’
+How to determine the end-of-stream.
+
+‘longest’
+Duration of longest input. (default)
+
+‘shortest’
+Duration of shortest input.
+
+‘first’
+Duration of first input.
+
+‘dropout_transition’
+Transition time, in seconds, for volume renormalization when an input stream ends. The default value is 2 seconds.
