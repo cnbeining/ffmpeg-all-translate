@@ -1,0 +1,101 @@
+18.2.1 Options
+Mapping from FFmpeg to libvpx options with conversion notes in parentheses.
+
+‘threads’
+g_threads
+
+‘profile’
+g_profile
+
+‘vb’
+rc_target_bitrate
+
+‘g’
+kf_max_dist
+
+‘keyint_min’
+kf_min_dist
+
+‘qmin’
+rc_min_quantizer
+
+‘qmax’
+rc_max_quantizer
+
+‘bufsize, vb’
+rc_buf_sz (bufsize * 1000 / vb)
+
+rc_buf_optimal_sz (bufsize * 1000 / vb * 5 / 6)
+
+‘rc_init_occupancy, vb’
+rc_buf_initial_sz (rc_init_occupancy * 1000 / vb)
+
+‘rc_buffer_aggressivity’
+rc_undershoot_pct
+
+‘skip_threshold’
+rc_dropframe_thresh
+
+‘qcomp’
+rc_2pass_vbr_bias_pct
+
+‘maxrate, vb’
+rc_2pass_vbr_maxsection_pct (maxrate * 100 / vb)
+
+‘minrate, vb’
+rc_2pass_vbr_minsection_pct (minrate * 100 / vb)
+
+‘minrate, maxrate, vb’
+VPX_CBR (minrate == maxrate == vb)
+
+‘crf’
+VPX_CQ, VP8E_SET_CQ_LEVEL
+
+‘quality’
+‘best’
+VPX_DL_BEST_QUALITY
+
+‘good’
+VPX_DL_GOOD_QUALITY
+
+‘realtime’
+VPX_DL_REALTIME
+
+‘speed’
+VP8E_SET_CPUUSED
+
+‘nr’
+VP8E_SET_NOISE_SENSITIVITY
+
+‘mb_threshold’
+VP8E_SET_STATIC_THRESHOLD
+
+‘slices’
+VP8E_SET_TOKEN_PARTITIONS
+
+‘max-intra-rate’
+VP8E_SET_MAX_INTRA_BITRATE_PCT
+
+‘force_key_frames’
+VPX_EFLAG_FORCE_KF
+
+‘Alternate reference frame related’
+‘vp8flags altref’
+VP8E_SET_ENABLEAUTOALTREF
+
+‘arnr_max_frames’
+VP8E_SET_ARNR_MAXFRAMES
+
+‘arnr_type’
+VP8E_SET_ARNR_TYPE
+
+‘arnr_strength’
+VP8E_SET_ARNR_STRENGTH
+
+‘rc_lookahead’
+g_lag_in_frames
+
+‘vp8flags error_resilient’
+g_error_resilient
+
+For more information about libvpx see: http://www.webmproject.org/
