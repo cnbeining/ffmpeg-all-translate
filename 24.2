@@ -1,0 +1,17 @@
+24.2 concat
+
+Physical concatenation protocol.
+
+Allow to read and seek from many resource in sequence as if they were a unique resource.
+
+A URL accepted by this protocol has the syntax:
+
+   
+concat:URL1|URL2|...|URLN
+where URL1, URL2, ..., URLN are the urls of the resource to be concatenated, each one possibly specifying a distinct protocol.
+
+For example to read a sequence of files ‘split1.mpeg’, ‘split2.mpeg’, ‘split3.mpeg’ with ffplay use the command:
+
+ 	
+ffplay concat:split1.mpeg\|split2.mpeg\|split3.mpeg
+Note that you may need to escape the character "|" which is special for many shells.
