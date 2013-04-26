@@ -1,0 +1,13 @@
+34.1 aconvert
+
+Convert the input audio format to the specified formats.
+
+This filter is deprecated. Use aformat instead.
+
+The filter accepts a string of the form: "sample_format:channel_layout".
+
+sample_format specifies the sample format, and can be a string or the corresponding numeric value defined in ‘libavutil/samplefmt.h’. Use ’p’ suffix for a planar sample format.
+
+channel_layout specifies the channel layout, and can be a string or the corresponding number value defined in ‘libavutil/channel_layout.h’.
+
+The special parameter "auto", signifies that the filter will automatically select the output format depending on the output filter.
