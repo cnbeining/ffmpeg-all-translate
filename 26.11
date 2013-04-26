@@ -1,0 +1,11 @@
+26.11 oss
+
+Open Sound System input device.
+
+The filename to provide to the input device is the device node representing the OSS input device, and is usually set to ‘/dev/dsp’.
+
+For example to grab from ‘/dev/dsp’ using ffmpeg use the command:
+
+   
+ffmpeg -f oss -i /dev/dsp /tmp/oss.wav
+For more information about OSS see: http://manuals.opensound.com/usersguide/dsp.html
