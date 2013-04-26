@@ -1,0 +1,2 @@
+17.1.2 Extended Bitstream Information
+The extended bitstream options are part of the Alternate Bit Stream Syntax as specified in Annex D of the A/52:2010 standard. It is grouped into 2 parts. If any one parameter in a group is specified, all values in that group will be written to the bitstream. Default values are used for those that are written but have not been specified. If the mixing levels are written, the decoder will use these values instead of the ones specified in the center_mixlev and surround_mixlev options if it supports the Alternate Bit Stream Syntax.
