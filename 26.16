@@ -1,0 +1,26 @@
+26.16 x11grab
+
+X11 video input device.
+
+This device allows to capture a region of an X11 display.
+
+The filename passed as input has the syntax:
+
+   
+[hostname]:display_number.screen_number[+x_offset,y_offset]
+hostname:display_number.screen_number specifies the X11 display name of the screen to grab from. hostname can be omitted, and defaults to "localhost". The environment variable DISPLAY contains the default display name.
+
+x_offset and y_offset specify the offsets of the grabbed area with respect to the top-left border of the X11 screen. They default to 0.
+
+Check the X11 documentation (e.g. man X) for more detailed information.
+
+Use the dpyinfo program for getting basic information about the properties of your X11 display (e.g. grep for "name" or "dimensions").
+
+For example to grab from ‘:0.0’ using ffmpeg:
+
+ 	
+ffmpeg -f x11grab -r 25 -s cif -i :0.0 out.mpg
+Grab at position 10,20:
+
+ 	
+ffmpeg -f x11grab -r 25 -s cif -i :0.0+10,20 out.mpg
