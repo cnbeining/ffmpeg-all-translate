@@ -1,0 +1,23 @@
+26.1 alsa
+
+ALSA (Advanced Linux Sound Architecture) input device.
+
+To enable this input device during configuration you need libasound installed on your system.
+
+This device allows capturing from an ALSA device. The name of the device to capture has to be an ALSA card identifier.
+
+An ALSA identifier has the syntax:
+
+   
+hw:CARD[,DEV[,SUBDEV]]
+where the DEV and SUBDEV components are optional.
+
+The three arguments (in order: CARD,DEV,SUBDEV) specify card number or identifier, device number and subdevice number (-1 means any).
+
+To see the list of cards currently recognized by your system check the files ‘/proc/asound/cards’ and ‘/proc/asound/devices’.
+
+For example to capture with ffmpeg from an ALSA device with card id 0, you may run the command:
+
+ 	
+ffmpeg -f alsa -i hw:0 alsaout.wav
+For more information see: http://www.alsa-project.org/alsa-doc/alsa-lib/pcm.html
