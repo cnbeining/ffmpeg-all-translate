@@ -1,0 +1,17 @@
+24.22 tcp
+
+Trasmission Control Protocol.
+
+The required syntax for a TCP url is:
+
+   
+tcp://hostname:port[?options]
+‘listen’
+Listen for an incoming connection
+
+‘timeout=microseconds’
+In read mode: if no data arrived in more than this time interval, raise error. In write mode: if socket cannot be written in more than this time interval, raise error. This also sets timeout on TCP connection establishing.
+
+ 	
+ffmpeg -i input -f format tcp://hostname:port?listen
+ffplay tcp://hostname:port
