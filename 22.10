@@ -1,0 +1,16 @@
+22.10 null
+
+Null muxer.
+
+This muxer does not generate any output file, it is mainly useful for testing or benchmarking purposes.
+
+For example to benchmark decoding with ffmpeg you can use the command:
+
+   
+ffmpeg -benchmark -i INPUT -f null out.null
+Note that the above command does not read or write the ‘out.null’ file, but specifying the output file is required by the ffmpeg syntax.
+
+Alternatively you can write the command as:
+
+ 	
+ffmpeg -benchmark -i INPUT -f null -
