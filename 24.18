@@ -1,0 +1,24 @@
+24.18 rtmp, rtmpe, rtmps, rtmpt, rtmpte
+
+Real-Time Messaging Protocol and its variants supported through librtmp.
+
+Requires the presence of the librtmp headers and library during configuration. You need to explicitly configure the build with "–enable-librtmp". If enabled this will replace the native RTMP protocol.
+
+This protocol provides most client functions and a few server functions needed to support RTMP, RTMP tunneled in HTTP (RTMPT), encrypted RTMP (RTMPE), RTMP over SSL/TLS (RTMPS) and tunneled variants of these encrypted types (RTMPTE, RTMPTS).
+
+The required syntax is:
+
+   
+rtmp_proto://server[:port][/app][/playpath] options
+where rtmp_proto is one of the strings "rtmp", "rtmpt", "rtmpe", "rtmps", "rtmpte", "rtmpts" corresponding to each RTMP variant, and server, port, app and playpath have the same meaning as specified for the RTMP native protocol. options contains a list of space-separated options of the form key=val.
+
+See the librtmp manual page (man 3 librtmp) for more information.
+
+For example, to stream a file in real-time to an RTMP server using ffmpeg:
+
+ 	
+ffmpeg -re -i myfile -f flv rtmp://myserver/live/mystream
+To play the same stream using ffplay:
+
+ 	
+ffplay "rtmp://myserver/live/mystream live=1"
