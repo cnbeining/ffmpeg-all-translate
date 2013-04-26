@@ -1,0 +1,12 @@
+26.12 pulse
+
+pulseaudio input device.
+
+To enable this input device during configuration you need libpulse-simple installed in your system.
+
+The filename to provide to the input device is a source device or the string "default"
+
+To list the pulse source devices and their properties you can invoke the command pactl list sources.
+
+   
+ffmpeg -f pulse -i default /tmp/pulse.wav
