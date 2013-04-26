@@ -1,0 +1,21 @@
+21.5 rawvideo
+
+Raw video demuxer.
+
+This demuxer allows to read raw video data. Since there is no header specifying the assumed video parameters, the user must specify them in order to be able to decode the data correctly.
+
+This demuxer accepts the following options:
+
+‘framerate’
+Set input video frame rate. Default value is 25.
+
+‘pixel_format’
+Set the input video pixel format. Default value is yuv420p.
+
+‘video_size’
+Set the input video size. This value must be specified explicitly.
+
+For example to read a rawvideo file ‘input.raw’ with ffplay, assuming a pixel format of rgb24, a video size of 320x240, and a frame rate of 10 images per second, use the command:
+
+   
+ffplay -f rawvideo -pixel_format rgb24 -video_size 320x240 -framerate 10 input.raw
