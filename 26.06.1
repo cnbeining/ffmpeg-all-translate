@@ -1,0 +1,9 @@
+26.6.1 Options
+‘dvtype’
+Override autodetection of DV/HDV. This should only be used if auto detection does not work, or if usage of a different device type should be prohibited. Treating a DV device as HDV (or vice versa) will not work and result in undefined behavior. The values ‘auto’, ‘dv’ and ‘hdv’ are supported.
+
+‘dvbuffer’
+Set maxiumum size of buffer for incoming data, in frames. For DV, this is an exact value. For HDV, it is not frame exact, since HDV does not have a fixed frame size.
+
+‘dvguid’
+Select the capture device by specifying it’s GUID. Capturing will only be performed from the specified device and fails if no device with the given GUID is found. This is useful to select the input if multiple devices are connected at the same time. Look at /sys/bus/firewire/devices to find out the GUIDs.
