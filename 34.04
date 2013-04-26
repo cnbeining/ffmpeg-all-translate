@@ -1,0 +1,29 @@
+34.4 lowpass
+
+Apply a low-pass filter with 3dB point frequency. The filter can be either single-pole or double-pole (the default). The filter roll off at 6dB per pole per octave (20dB per pole per decade).
+
+The filter accepts the following options:
+
+‘frequency, f’
+Set frequency in Hz. Default is 500.
+
+‘poles, p’
+Set number of poles. Default is 2.
+
+‘width_type’
+Set method to specify band-width of filter.
+
+‘h’
+Hz
+
+‘q’
+Q-Factor
+
+‘o’
+octave
+
+‘s’
+slope
+
+‘width, w’
+Specify the band-width of a filter in width_type units. Applies only to double-pole filter. The default is 0.707q and gives a Butterworth response.
