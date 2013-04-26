@@ -1,0 +1,31 @@
+26.10.1 Options
+‘channels’
+Set the number of channels in the captured audio. Only the values ‘1’ (monaural) and ‘2’ (stereo) are currently supported. Defaults to ‘2’.
+
+‘sample_size’
+Set the sample size (in bits) of the captured audio. Only the values ‘8’ and ‘16’ are currently supported. Defaults to ‘16’.
+
+‘sample_rate’
+Set the sample rate (in Hz) of the captured audio. Defaults to ‘44.1k’.
+
+‘list_devices’
+If set to ‘true’, print a list of devices and exit. Defaults to ‘false’.
+
+26.10.2 Examples
+Print the list of OpenAL supported devices and exit:
+
+   
+$ ffmpeg -list_devices true -f openal -i dummy out.ogg
+Capture from the OpenAL device ‘DR-BT101 via PulseAudio’:
+
+ 	
+$ ffmpeg -f openal -i 'DR-BT101 via PulseAudio' out.ogg
+Capture from the default device (note the empty string ” as filename):
+
+ 	
+$ ffmpeg -f openal -i '' out.ogg
+Capture from two devices simultaneously, writing to two different files, within the same ffmpeg command:
+
+ 	
+$ ffmpeg -f openal -i 'DR-BT101 via PulseAudio' out1.ogg -f openal -i 'ALSA Default' out2.ogg
+Note: not all OpenAL implementations support multiple simultaneous capture - try the latest OpenAL Soft if the above does not work.
