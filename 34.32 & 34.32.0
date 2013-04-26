@@ -1,0 +1,34 @@
+34.31 resample
+
+Convert the audio sample format, sample rate and channel layout. This filter is not meant to be used directly.
+
+34.32 volume
+
+Adjust the input audio volume.
+
+The filter accepts the following options:
+
+‘volume’
+Expresses how the audio volume will be increased or decreased.
+
+Output values are clipped to the maximum value.
+
+The output audio volume is given by the relation:
+
+   
+output_volume = volume * input_volume
+Default value for volume is 1.0.
+
+‘precision’
+Set the mathematical precision.
+
+This determines which input sample formats will be allowed, which affects the precision of the volume scaling.
+
+‘fixed’
+8-bit fixed-point; limits input sample format to U8, S16, and S32.
+
+‘float’
+32-bit floating-point; limits input sample format to FLT. (default)
+
+‘double’
+64-bit floating-point; limits input sample format to DBL.
