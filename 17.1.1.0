@@ -1,0 +1,9 @@
+17.1.1 AC-3 Metadata
+The AC-3 metadata options are used to set parameters that describe the audio, but in most cases do not affect the audio encoding itself. Some of the options do directly affect or influence the decoding and playback of the resulting bitstream, while others are just for informational purposes. A few of the options will add bits to the output stream that could otherwise be used for audio data, and will thus affect the quality of the output. Those will be indicated accordingly with a note in the option list below.
+
+These parameters are described in detail in several publicly-available documents.
+
+A/52:2010 - Digital Audio Compression (AC-3) (E-AC-3) Standard
+A/54 - Guide to the Use of the ATSC Digital Television Standard
+Dolby Metadata Guide
+Dolby Digital Professional Encoding Guidelines
