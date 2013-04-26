@@ -1,0 +1,21 @@
+17.1.1.3 Audio Production Information
+
+Audio Production Information is optional information describing the mixing environment. Either none or both of the fields are written to the bitstream.
+
+‘-mixing_level number’
+Mixing Level. Specifies peak sound pressure level (SPL) in the production environment when the mix was mastered. Valid values are 80 to 111, or -1 for unknown or not indicated. The default value is -1, but that value cannot be used if the Audio Production Information is written to the bitstream. Therefore, if the room_type option is not the default value, the mixing_level option must not be -1.
+
+‘-room_type type’
+Room Type. Describes the equalization used during the final mixing session at the studio or on the dubbing stage. A large room is a dubbing stage with the industry standard X-curve equalization; a small room has flat equalization. This field will not be written to the bitstream if both the mixing_level option and the room_type option have the default values.
+
+‘0’
+‘notindicated’
+Not Indicated (default)
+
+‘1’
+‘large’
+Large Room
+
+‘2’
+‘small’
+Small Room
