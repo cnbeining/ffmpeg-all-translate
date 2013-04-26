@@ -1,0 +1,11 @@
+24. Protocols
+
+Protocols are configured elements in FFmpeg which allow to access resources which require the use of a particular protocol.
+
+When you configure your FFmpeg build, all the supported protocols are enabled by default. You can list all available ones using the configure option "–list-protocols".
+
+You can disable all the protocols using the configure option "–disable-protocols", and selectively enable a protocol using the option "–enable-protocol=PROTOCOL", or you can disable a particular protocol using the option "–disable-protocol=PROTOCOL".
+
+The option "-protocols" of the ff* tools will display the list of supported protocols.
+
+A description of the currently available protocols follows.
