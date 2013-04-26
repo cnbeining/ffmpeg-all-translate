@@ -1,0 +1,65 @@
+21.4 image2
+
+Image file demuxer.
+
+This demuxer reads from a list of image files specified by a pattern. The syntax and meaning of the pattern is specified by the option pattern_type.
+
+The pattern may contain a suffix which is used to automatically determine the format of the images contained in the files.
+
+The size, the pixel format, and the format of each image must be the same for all the files in the sequence.
+
+This demuxer accepts the following options:
+
+‘framerate’
+Set the frame rate for the video stream. It defaults to 25.
+
+‘loop’
+If set to 1, loop over the input. Default value is 0.
+
+‘pattern_type’
+Select the pattern type used to interpret the provided filename.
+
+pattern_type accepts one of the following values.
+
+‘sequence’
+Select a sequence pattern type, used to specify a sequence of files indexed by sequential numbers.
+
+A sequence pattern may contain the string "%d" or "%0Nd", which specifies the position of the characters representing a sequential number in each filename matched by the pattern. If the form "%d0Nd" is used, the string representing the number in each filename is 0-padded and N is the total number of 0-padded digits representing the number. The literal character ’%’ can be specified in the pattern with the string "%%".
+
+If the sequence pattern contains "%d" or "%0Nd", the first filename of the file list specified by the pattern must contain a number inclusively contained between start_number and start_number+start_number_range-1, and all the following numbers must be sequential.
+
+For example the pattern "img-%03d.bmp" will match a sequence of filenames of the form ‘img-001.bmp’, ‘img-002.bmp’, ..., ‘img-010.bmp’, etc.; the pattern "i%%m%%g-%d.jpg" will match a sequence of filenames of the form ‘i%m%g-1.jpg’, ‘i%m%g-2.jpg’, ..., ‘i%m%g-10.jpg’, etc.
+
+Note that the pattern must not necessarily contain "%d" or "%0Nd", for example to convert a single image file ‘img.jpeg’ you can employ the command:
+
+   
+ffmpeg -i img.jpeg img.png
+‘glob’
+Select a glob wildcard pattern type.
+
+The pattern is interpreted like a glob() pattern. This is only selectable if libavformat was compiled with globbing support.
+
+‘glob_sequence (deprecated, will be removed)’
+Select a mixed glob wildcard/sequence pattern.
+
+If your version of libavformat was compiled with globbing support, and the provided pattern contains at least one glob meta character among %*?[]{} that is preceded by an unescaped "%", the pattern is interpreted like a glob() pattern, otherwise it is interpreted like a sequence pattern.
+
+All glob special characters %*?[]{} must be prefixed with "%". To escape a literal "%" you shall use "%%".
+
+For example the pattern foo-%*.jpeg will match all the filenames prefixed by "foo-" and terminating with ".jpeg", and foo-%?%?%?.jpeg will match all the filenames prefixed with "foo-", followed by a sequence of three characters, and terminating with ".jpeg".
+
+This pattern type is deprecated in favor of glob and sequence.
+
+Default value is glob_sequence.
+
+‘pixel_format’
+Set the pixel format of the images to read. If not specified the pixel format is guessed from the first image file in the sequence.
+
+‘start_number’
+Set the index of the file matched by the image file pattern to start to read from. Default value is 0.
+
+‘start_number_range’
+Set the index interval range to check when looking for the first image file in the sequence, starting from start_number. Default value is 5.
+
+‘video_size’
+Set the video size of the images to read. If not specified the video size is guessed from the first image file in the sequence.
