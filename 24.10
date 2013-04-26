@@ -1,0 +1,15 @@
+24.10 md5
+
+MD5 output protocol.
+
+Computes the MD5 hash of the data to be written, and on close writes this to the designated output or stdout if none is specified. It can be used to test muxers without writing an actual file.
+
+Some examples follow.
+
+   
+# Write the MD5 hash of the encoded AVI file to the file output.avi.md5.
+ffmpeg -i input.flv -f avi -y md5:output.avi.md5
+
+# Write the MD5 hash of the encoded AVI file to stdout.
+ffmpeg -i input.flv -f avi -y md5:
+Note that some formats (typically MOV) require the output protocol to be seekable, so they will fail with the MD5 output protocol.
