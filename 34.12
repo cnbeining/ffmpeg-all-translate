@@ -1,0 +1,21 @@
+34.12 aformat
+
+Set output format constraints for the input audio. The framework will negotiate the most appropriate format to minimize conversions.
+
+The filter accepts the following named parameters:
+
+‘sample_fmts’
+A ’|’-separated list of requested sample formats.
+
+‘sample_rates’
+A ’|’-separated list of requested sample rates.
+
+‘channel_layouts’
+A ’|’-separated list of requested channel layouts.
+
+If a parameter is omitted, all values are allowed.
+
+For example to force the output to either unsigned 8-bit or signed 16-bit stereo:
+
+   
+aformat=sample_fmts=u8|s16:channel_layouts=stereo
