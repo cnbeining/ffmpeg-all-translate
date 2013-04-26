@@ -1,0 +1,26 @@
+34.2 allpass
+
+Apply a two-pole all-pass filter with central frequency (in Hz) frequency, and filter-width width. An all-pass filter changes the audio’s frequency to phase relationship without changing its frequency to amplitude relationship.
+
+The filter accepts the following options:
+
+‘frequency, f’
+Set frequency in Hz.
+
+‘width_type’
+Set method to specify band-width of filter.
+
+‘h’
+Hz
+
+‘q’
+Q-Factor
+
+‘o’
+octave
+
+‘s’
+slope
+
+‘width, w’
+Specify the band-width of a filter in width_type units.
