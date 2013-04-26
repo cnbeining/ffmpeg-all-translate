@@ -1,0 +1,5 @@
+26.15 vfwcap
+
+VfW (Video for Windows) capture input device.
+
+The filename passed as input is the capture driver number, ranging from 0 to 9. You may use "list" as filename to print a list of drivers. Any other filename will be interpreted as device number 0.
