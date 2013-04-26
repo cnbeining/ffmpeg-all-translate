@@ -1,0 +1,140 @@
+18.3.2 Private Options
+‘-preset string’
+Set the encoding preset (cf. x264 –fullhelp).
+
+‘-tune string’
+Tune the encoding params (cf. x264 –fullhelp).
+
+‘-profile string’
+Set profile restrictions (cf. x264 –fullhelp).
+
+‘-fastfirstpass integer’
+Use fast settings when encoding first pass.
+
+‘-crf float’
+Select the quality for constant quality mode.
+
+‘-crf_max float’
+In CRF mode, prevents VBV from lowering quality beyond this point.
+
+‘-qp integer’
+Constant quantization parameter rate control method.
+
+‘-aq-mode integer’
+AQ method
+
+Possible values:
+
+‘none’
+‘variance’
+Variance AQ (complexity mask).
+
+‘autovariance’
+Auto-variance AQ (experimental).
+
+‘-aq-strength float’
+AQ strength, reduces blocking and blurring in flat and textured areas.
+
+‘-psy integer’
+Use psychovisual optimizations.
+
+‘-psy-rd string’
+Strength of psychovisual optimization, in <psy-rd>:<psy-trellis> format.
+
+‘-rc-lookahead integer’
+Number of frames to look ahead for frametype and ratecontrol.
+
+‘-weightb integer’
+Weighted prediction for B-frames.
+
+‘-weightp integer’
+Weighted prediction analysis method.
+
+Possible values:
+
+‘none’
+‘simple’
+‘smart’
+‘-ssim integer’
+Calculate and print SSIM stats.
+
+‘-intra-refresh integer’
+Use Periodic Intra Refresh instead of IDR frames.
+
+‘-b-bias integer’
+Influences how often B-frames are used.
+
+‘-b-pyramid integer’
+Keep some B-frames as references.
+
+Possible values:
+
+‘none’
+‘strict’
+Strictly hierarchical pyramid.
+
+‘normal’
+Non-strict (not Blu-ray compatible).
+
+‘-mixed-refs integer’
+One reference per partition, as opposed to one reference per macroblock.
+
+‘-8x8dct integer’
+High profile 8x8 transform.
+
+‘-fast-pskip integer’
+‘-aud integer’
+Use access unit delimiters.
+
+‘-mbtree integer’
+Use macroblock tree ratecontrol.
+
+‘-deblock string’
+Loop filter parameters, in <alpha:beta> form.
+
+‘-cplxblur float’
+Reduce fluctuations in QP (before curve compression).
+
+‘-partitions string’
+A comma-separated list of partitions to consider, possible values: p8x8, p4x4, b8x8, i8x8, i4x4, none, all.
+
+‘-direct-pred integer’
+Direct MV prediction mode
+
+Possible values:
+
+‘none’
+‘spatial’
+‘temporal’
+‘auto’
+‘-slice-max-size integer’
+Limit the size of each slice in bytes.
+
+‘-stats string’
+Filename for 2 pass stats.
+
+‘-nal-hrd integer’
+Signal HRD information (requires vbv-bufsize; cbr not allowed in .mp4).
+
+Possible values:
+
+‘none’
+‘vbr’
+‘cbr’
+‘x264opts options’
+Allow to set any x264 option, see x264 --fullhelp for a list.
+
+options is a list of key=value couples separated by ":". In filter and psy-rd options that use ":" as a separator themselves, use "," instead. They accept it as well since long ago but this is kept undocumented for some reason.
+
+For example to specify libx264 encoding options with ffmpeg:
+
+   
+ffmpeg -i foo.mpg -vcodec libx264 -x264opts keyint=123:min-keyint=20 -an out.mkv
+For more information about libx264 and the supported options see: http://www.videolan.org/developers/x264.html
+
+‘-x264-params string’
+Override the x264 configuration using a :-separated list of key=value parameters.
+
+ 	
+-x264-params level=30:bframes=0:weightp=0:cabac=0:ref=1:vbv-maxrate=768:vbv-bufsize=2000:analyse=all:me=umh:no-fast-pskip=1:subq=6:8x8dct=0:trellis=0
+Encoding avpresets for common usages are provided so they can be used with the general presets system (e.g. passing the -pre option).
