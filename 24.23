@@ -1,0 +1,33 @@
+24.23 tls
+
+Transport Layer Security/Secure Sockets Layer
+
+The required syntax for a TLS/SSL url is:
+
+   
+tls://hostname:port[?options]
+‘listen’
+Act as a server, listening for an incoming connection.
+
+‘cafile=filename’
+Certificate authority file. The file must be in OpenSSL PEM format.
+
+‘cert=filename’
+Certificate file. The file must be in OpenSSL PEM format.
+
+‘key=filename’
+Private key file.
+
+‘verify=0|1’
+Verify the peer’s certificate.
+
+Example command lines:
+
+To create a TLS/SSL server that serves an input stream.
+
+ 	
+ffmpeg -i input -f format tls://hostname:port?listen&cert=server.crt&key=server.key
+To play back a stream from the TLS/SSL server using ffplay:
+
+ 	
+ffplay tls://hostname:port
