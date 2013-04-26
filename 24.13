@@ -1,0 +1,5 @@
+24.13 rtmpe
+
+Encrypted Real-Time Messaging Protocol.
+
+The Encrypted Real-Time Messaging Protocol (RTMPE) is used for streaming multimedia content within standard cryptographic primitives, consisting of Diffie-Hellman key exchange and HMACSHA256, generating a pair of RC4 keys.
