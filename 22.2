@@ -1,0 +1,25 @@
+22.2 framecrc
+
+Per-packet CRC (Cyclic Redundancy Check) testing format.
+
+This muxer computes and prints the Adler-32 CRC for each audio and video packet. By default audio frames are converted to signed 16-bit raw audio and video frames to raw video before computing the CRC.
+
+The output of the muxer consists of a line for each audio and video packet of the form:
+
+   
+stream_index, packet_dts, packet_pts, packet_duration, packet_size, 0xCRC
+CRC is a hexadecimal number 0-padded to 8 digits containing the CRC of the packet.
+
+For example to compute the CRC of the audio and video frames in ‘INPUT’, converted to raw audio and video packets, and store it in the file ‘out.crc’:
+
+ 	
+ffmpeg -i INPUT -f framecrc out.crc
+To print the information to stdout, use the command:
+
+ 	
+ffmpeg -i INPUT -f framecrc -
+With ffmpeg, you can select the output format to which the audio and video frames are encoded before computing the CRC for each packet by specifying the audio and video codec. For example, to compute the CRC of each decoded input audio frame converted to PCM unsigned 8-bit and of each decoded input video frame converted to MPEG-2 video, use the command:
+
+ 	
+ffmpeg -i INPUT -c:a pcm_u8 -c:v mpeg2video -f framecrc -
+See also the crc muxer.
