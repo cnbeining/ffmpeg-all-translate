@@ -1,0 +1,64 @@
+24.24 udp
+
+User Datagram Protocol.
+
+The required syntax for a UDP url is:
+
+   
+udp://hostname:port[?options]
+options contains a list of &-separated options of the form key=val.
+
+In case threading is enabled on the system, a circular buffer is used to store the incoming data, which allows to reduce loss of data due to UDP socket buffer overruns. The fifo_size and overrun_nonfatal options are related to this buffer.
+
+The list of supported options follows.
+
+‘buffer_size=size’
+Set the UDP socket buffer size in bytes. This is used both for the receiving and the sending buffer size.
+
+‘localport=port’
+Override the local UDP port to bind with.
+
+‘localaddr=addr’
+Choose the local IP address. This is useful e.g. if sending multicast and the host has multiple interfaces, where the user can choose which interface to send on by specifying the IP address of that interface.
+
+‘pkt_size=size’
+Set the size in bytes of UDP packets.
+
+‘reuse=1|0’
+Explicitly allow or disallow reusing UDP sockets.
+
+‘ttl=ttl’
+Set the time to live value (for multicast only).
+
+‘connect=1|0’
+Initialize the UDP socket with connect(). In this case, the destination address can’t be changed with ff_udp_set_remote_url later. If the destination address isn’t known at the start, this option can be specified in ff_udp_set_remote_url, too. This allows finding out the source address for the packets with getsockname, and makes writes return with AVERROR(ECONNREFUSED) if "destination unreachable" is received. For receiving, this gives the benefit of only receiving packets from the specified peer address/port.
+
+‘sources=address[,address]’
+Only receive packets sent to the multicast group from one of the specified sender IP addresses.
+
+‘block=address[,address]’
+Ignore packets sent to the multicast group from the specified sender IP addresses.
+
+‘fifo_size=units’
+Set the UDP receiving circular buffer size, expressed as a number of packets with size of 188 bytes. If not specified defaults to 7*4096.
+
+‘overrun_nonfatal=1|0’
+Survive in case of UDP receiving circular buffer overrun. Default value is 0.
+
+‘timeout=microseconds’
+In read mode: if no data arrived in more than this time interval, raise error.
+
+Some usage examples of the UDP protocol with ffmpeg follow.
+
+To stream over UDP to a remote endpoint:
+
+ 	
+ffmpeg -i input -f format udp://hostname:port
+To stream in mpegts format over UDP using 188 sized UDP packets, using a large input buffer:
+
+ 	
+ffmpeg -i input -f mpegts udp://hostname:port?pkt_size=188&buffer_size=65535
+To receive over UDP from a remote endpoint:
+
+ 	
+ffmpeg -i udp://[multicast-address]:port
