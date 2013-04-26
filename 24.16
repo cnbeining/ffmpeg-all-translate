@@ -1,0 +1,5 @@
+24.16 rtmpte
+
+Encrypted Real-Time Messaging Protocol tunneled through HTTP.
+
+The Encrypted Real-Time Messaging Protocol tunneled through HTTP (RTMPTE) is used for streaming multimedia content within HTTP requests to traverse firewalls.
