@@ -1,0 +1,21 @@
+26.4 dv1394
+
+Linux DV 1394 input device.
+
+26.5 fbdev
+
+Linux framebuffer input device.
+
+The Linux framebuffer is a graphic hardware-independent abstraction layer to show graphics on a computer monitor, typically on the console. It is accessed through a file device node, usually ‘/dev/fb0’.
+
+For more detailed information read the file Documentation/fb/framebuffer.txt included in the Linux source tree.
+
+To record from the framebuffer device ‘/dev/fb0’ with ffmpeg:
+
+   
+ffmpeg -f fbdev -r 10 -i /dev/fb0 out.avi
+You can take a single screenshot image with the command:
+
+ 	
+ffmpeg -f fbdev -frames:v 1 -r 1 -i /dev/fb0 screenshot.jpeg
+See also http://linux-fbdev.sourceforge.net/, and fbset(1).
