@@ -1,0 +1,24 @@
+18.1.1 Options
+The following global options are mapped to internal libtheora options which affect the quality and the bitrate of the encoded stream.
+
+‘b’
+Set the video bitrate, only works if the qscale flag in ‘flags’ is not enabled.
+
+‘flags’
+Used to enable constant quality mode encoding through the ‘qscale’ flag, and to enable the pass1 and pass2 modes.
+
+‘g’
+Set the GOP size.
+
+‘global_quality’
+Set the global quality in lambda units, only works if the qscale flag in ‘flags’ is enabled. The value is clipped in the [0 - 10*FF_QP2LAMBDA] range, and then multiplied for 6.3 to get a value in the native libtheora range [0-63]. A higher value corresponds to a higher quality.
+
+For example, to set maximum constant quality encoding with ffmpeg:
+
+   
+ffmpeg -i INPUT -flags:v qscale -global_quality:v "10*QP2LAMBDA" -codec:v libtheora OUTPUT.ogg
+18.2 libvpx
+
+VP8 format supported through libvpx.
+
+Requires the presence of the libvpx headers and library during configuration. You need to explicitly configure the build with --enable-libvpx.
