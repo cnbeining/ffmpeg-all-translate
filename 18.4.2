@@ -1,0 +1,6 @@
+18.4.2 Speed considerations
+In the default mode of operation the encoder has to honor frame constraints (i.e. not produc frames with size bigger than requested) while still making output picture as good as possible. A frame containing a lot of small details is harder to compress and the encoder would spend more time searching for appropriate quantizers for each slice.
+
+Setting a higher ‘bits_per_mb’ limit will improve the speed.
+
+For the fastest encoding speed set the ‘qscale’ parameter (4 is the recommended value) and do not set a size constraint.
