@@ -1,0 +1,7 @@
+34.15 anull
+
+Pass the audio source unchanged to the output.
+
+34.16 apad
+
+Pad the end of a audio stream with silence, this can be used together with -shortest to extend audio streams to the same length as the video stream.
