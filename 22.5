@@ -1,0 +1,19 @@
+22.5 ico
+
+ICO file muxer.
+
+Microsoft’s icon file format (ICO) has some strict limitations that should be noted:
+
+Size cannot exceed 256 pixels in any dimension
+Only BMP and PNG images can be stored
+If a BMP image is used, it must be one of the following pixel formats:
+   
+BMP Bit Depth      FFmpeg Pixel Format
+1bit               pal8
+4bit               pal8
+8bit               pal8
+16bit              rgb555le
+24bit              bgr24
+32bit              bgra
+If a BMP image is used, it must use the BITMAPINFOHEADER DIB header
+If a PNG image is used, it must use the rgba pixel format
