@@ -1,0 +1,25 @@
+24.1 bluray
+
+Read BluRay playlist.
+
+The accepted options are:
+
+‘angle’
+BluRay angle
+
+‘chapter’
+Start chapter (1...N)
+
+‘playlist’
+Playlist to read (BDMV/PLAYLIST/?????.mpls)
+
+Examples:
+
+Read longest playlist from BluRay mounted to /mnt/bluray:
+
+   
+bluray:/mnt/bluray
+Read angle 2 of playlist 4 from BluRay mounted to /mnt/bluray, start from chapter 2:
+
+ 	
+-playlist 4 -angle 2 -chapter 2 bluray:/mnt/bluray
