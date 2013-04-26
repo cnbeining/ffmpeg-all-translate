@@ -1,0 +1,5 @@
+18.1 libtheora
+
+Theora format supported through libtheora.
+
+Requires the presence of the libtheora headers and library during configuration. You need to explicitly configure the build with --enable-libtheora.
