@@ -1,0 +1,13 @@
+27.2.2 Examples
+The following command shows the ffmpeg output is an CACA window, forcing its size to 80x25:
+   
+ffmpeg -i INPUT -vcodec rawvideo -pix_fmt rgb24 -window_size 80x25 -f caca -
+Show the list of available drivers and exit:
+ 	
+ffmpeg -i INPUT -pix_fmt rgb24 -f caca -list_drivers true -
+Show the list of available dither colors and exit:
+ 	
+ffmpeg -i INPUT -pix_fmt rgb24 -f caca -list_dither colors -
+27.3 oss
+
+OSS (Open Sound System) output device.
