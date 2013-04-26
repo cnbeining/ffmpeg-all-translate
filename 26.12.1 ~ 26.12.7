@@ -1,0 +1,48 @@
+26.12.1 server AVOption
+The syntax is:
+
+   
+-server server name
+Connects to a specific server.
+
+26.12.2 name AVOption
+The syntax is:
+
+ 	
+-name application name
+Specify the application name pulse will use when showing active clients, by default it is the LIBAVFORMAT_IDENT string
+
+26.12.3 stream_name AVOption
+The syntax is:
+
+   
+-stream_name stream name
+Specify the stream name pulse will use when showing active streams, by default it is "record"
+
+26.12.4 sample_rate AVOption
+The syntax is:
+
+ 	
+-sample_rate samplerate
+Specify the samplerate in Hz, by default 48kHz is used.
+
+26.12.5 channels AVOption
+The syntax is:
+
+ 	
+-channels N
+Specify the channels in use, by default 2 (stereo) is set.
+
+26.12.6 frame_size AVOption
+The syntax is:
+
+ 	
+-frame_size bytes
+Specify the number of byte per frame, by default it is set to 1024.
+
+26.12.7 fragment_size AVOption
+The syntax is:
+
+ 	
+-fragment_size bytes
+Specify the minimal buffering fragment in pulseaudio, it will affect the audio latency. By default it is unset.
