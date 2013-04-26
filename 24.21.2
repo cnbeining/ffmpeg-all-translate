@@ -1,0 +1,19 @@
+24.21.2 Demuxer
+The syntax for a SAP url given to the demuxer is:
+
+   
+sap://[address][:port]
+address is the multicast address to listen for announcements on, if omitted, the default 224.2.127.254 (sap.mcast.net) is used. port is the port that is listened on, 9875 if omitted.
+
+The demuxers listens for announcements on the given address and port. Once an announcement is received, it tries to receive that particular stream.
+
+Example command lines follow.
+
+To play back the first stream announced on the normal SAP multicast address:
+
+ 	
+ffplay sap://
+To play back the first stream announced on one the default IPv6 SAP multicast address:
+
+ 	
+ffplay sap://[ff0e::2:7ffe]
