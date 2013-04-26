@@ -1,0 +1,24 @@
+33. Timeline editing
+
+Some filters support a generic ‘enable’ option. For the filters supporting timeline editing, this option can be set to an expression which is evaluated before sending a frame to the filter. If the evaluation is non-zero, the filter will be enabled, otherwise the frame will be sent unchanged to the next filter in the filtergraph.
+
+The expression accepts the following values:
+
+‘t’
+timestamp expressed in seconds, NAN if the input timestamp is unknown
+
+‘n’
+sequential number of the input frame, starting from 0
+
+‘pos’
+the position in the file of the input frame, NAN if unknown
+
+Additionally, these filters support an ‘enable’ command that can be used to re-define the expression.
+
+Like any other filtering option, the ‘enable’ option follows the same rules.
+
+For example, to enable a denoiser filter (hqdn3d) from 10 seconds to 3 minutes, and a curves filter starting at 3 seconds:
+
+   
+hqdn3d = enable='between(t,10,3*60)',
+curves = enable='gte(t,3)' : preset=cross_process
