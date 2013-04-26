@@ -1,0 +1,16 @@
+26.3.2 Examples
+Print the list of DirectShow supported devices and exit:
+   
+$ ffmpeg -list_devices true -f dshow -i dummy
+Open video device Camera:
+ 	
+$ ffmpeg -f dshow -i video="Camera"
+Open second video device with name Camera:
+ 	
+$ ffmpeg -f dshow -video_device_number 1 -i video="Camera"
+Open video device Camera and audio device Microphone:
+ 	
+$ ffmpeg -f dshow -i video="Camera":audio="Microphone"
+Print the list of supported options in selected device and exit:
+ 	
+$ ffmpeg -list_options true -f dshow -i video="Camera"
