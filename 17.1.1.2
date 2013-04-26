@@ -1,0 +1,25 @@
+17.1.1.2 Downmix Levels
+
+‘-center_mixlev level’
+Center Mix Level. The amount of gain the decoder should apply to the center channel when downmixing to stereo. This field will only be written to the bitstream if a center channel is present. The value is specified as a scale factor. There are 3 valid values:
+
+‘0.707’
+Apply -3dB gain
+
+‘0.595’
+Apply -4.5dB gain (default)
+
+‘0.500’
+Apply -6dB gain
+
+‘-surround_mixlev level’
+Surround Mix Level. The amount of gain the decoder should apply to the surround channel(s) when downmixing to stereo. This field will only be written to the bitstream if one or more surround channels are present. The value is specified as a scale factor. There are 3 valid values:
+
+‘0.707’
+Apply -3dB gain
+
+‘0.500’
+Apply -6dB gain (default)
+
+‘0.000’
+Silence Surround Channel(s)
