@@ -1,0 +1,17 @@
+22.7 md5
+
+MD5 testing format.
+
+This muxer computes and prints the MD5 hash of all the input audio and video frames. By default audio frames are converted to signed 16-bit raw audio and video frames to raw video before computing the hash.
+
+The output of the muxer consists of a single line of the form: MD5=MD5, where MD5 is a hexadecimal number representing the computed MD5 hash.
+
+For example to compute the MD5 hash of the input converted to raw audio and video, and store it in the file ‘out.md5’:
+
+   
+ffmpeg -i INPUT -f md5 out.md5
+You can print the MD5 to stdout with the command:
+
+ 	
+ffmpeg -i INPUT -f md5 -
+See also the framemd5 muxer.
