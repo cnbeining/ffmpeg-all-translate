@@ -1,0 +1,16 @@
+26.8.2 Examples
+Create a color video stream and play it back with ffplay:
+   
+ffplay -f lavfi -graph "color=c=pink [out0]" dummy
+As the previous example, but use filename for specifying the graph description, and omit the "out0" label:
+ 	
+ffplay -f lavfi color=c=pink
+Create three different video test filtered sources and play them:
+ 	
+ffplay -f lavfi -graph "testsrc [out0]; testsrc,hflip [out1]; testsrc,negate [out2]" test3
+Read an audio stream from a file using the amovie source and play it back with ffplay:
+ 	
+ffplay -f lavfi "amovie=test.wav"
+Read an audio stream and a video stream and play it back with ffplay:
+ 	
+ffplay -f lavfi "movie=test.avi[out0];amovie=test.wav[out1]"
