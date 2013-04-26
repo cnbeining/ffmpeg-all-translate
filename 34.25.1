@@ -1,0 +1,10 @@
+34.25.1 Mixing examples
+For example, if you want to down-mix from stereo to mono, but with a bigger factor for the left channel:
+
+   
+pan=1:c0=0.9*c0+0.1*c1
+A customized down-mix to stereo that works automatically for 3-, 4-, 5- and 7-channels surround:
+
+ 	
+pan=stereo: FL < FL + 0.5*FC + 0.6*BL + 0.6*SL : FR < FR + 0.5*FC + 0.6*BR + 0.6*SR
+Note that ffmpeg integrates a default down-mix (and up-mix) system that should be preferred (see "-ac" option) unless you have very specific needs.
