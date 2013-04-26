@@ -1,0 +1,11 @@
+24.4 file
+
+File access protocol.
+
+Allow to read from or read to a file.
+
+For example to read from a file ‘input.mpeg’ with ffmpeg use the command:
+
+   
+ffmpeg -i file:input.mpeg output.mpeg
+The ff* tools default to the file protocol, that is a resource specified with the name "FILE.mpeg" is interpreted as the URL "file:FILE.mpeg".
