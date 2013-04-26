@@ -1,0 +1,7 @@
+35.1.1 Examples
+   
+abuffer=sample_rate=44100:sample_fmt=s16p:channel_layout=stereo
+will instruct the source to accept planar 16bit signed stereo at 44100Hz. Since the sample format with name "s16p" corresponds to the number 6 and the "stereo" channel layout corresponds to the value 0x3, this is equivalent to:
+
+ 	
+abuffer=sample_rate=44100:sample_fmt=6:channel_layout=0x3
