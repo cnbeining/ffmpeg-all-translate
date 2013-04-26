@@ -1,0 +1,16 @@
+19.1 aac_adtstoasc
+
+19.2 chomp
+
+19.3 dump_extradata
+
+19.4 h264_mp4toannexb
+
+Convert an H.264 bitstream from length prefixed mode to start code prefixed mode (as defined in the Annex B of the ITU-T H.264 specification).
+
+This is required by some streaming formats, typically the MPEG-2 transport stream format ("mpegts").
+
+For example to remux an MP4 file containing an H.264 stream to mpegts format with ffmpeg, you can use the command:
+
+   
+ffmpeg -i INPUT.mp4 -codec copy -bsf:v h264_mp4toannexb OUTPUT.ts
