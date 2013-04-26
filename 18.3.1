@@ -1,0 +1,26 @@
+18.3.1 Option Mapping
+The following options are supported by the x264 wrapper, the x264-equivalent options follow the FFmpeg ones.
+
+b  bitrate FFmpeg b option is expressed in bits/s, x264 bitrate in kilobits/s.
+bf	bframes Maximum number of B-frames.
+g	keyint Maximum GOP size.
+qmin	qpmin
+qmax	qpmax
+qdiff	qpstep
+qblur	qblur
+qcomp	qcomp
+refs	ref
+sc_threshold	scenecut
+trellis	trellis
+nr	nr Noise reduction.
+me_range	merange
+me_method	me
+subq	subme
+b_strategy	b-adapt
+keyint_min	keyint-min
+coder	cabac Set coder to ac to use CABAC.
+cmp	chroma-me Set to chroma to use chroma motion estimation.
+threads	threads
+thread_type	sliced_threads Set to slice to use sliced threading instead of frame threading.
+flags -cgop	open-gop Set -cgop to use recovery points to close GOPs.
+rc_init_occupancy	vbv-init Initial buffer occupancy.
