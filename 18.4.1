@@ -1,0 +1,27 @@
+18.4.1 Private Options for prores-ks
+‘profile integer’
+Select the ProRes profile to encode
+
+‘proxy’
+‘lt’
+‘standard’
+‘hq’
+‘quant_mat integer’
+Select quantization matrix.
+
+‘auto’
+‘default’
+‘proxy’
+‘lt’
+‘standard’
+‘hq’
+If set to auto, the matrix matching the profile will be picked. If not set, the matrix providing the highest quality, default, will be picked.
+
+‘bits_per_mb integer’
+How many bits to allot for coding one macroblock. Different profiles use between 200 and 2400 bits per macroblock, the maximum is 8000.
+
+‘mbs_per_slice integer’
+Number of macroblocks in each slice (1-8); the default value (8) should be good in almost all situations.
+
+‘vendor string’
+Override the 4-byte vendor ID. A custom vendor ID like apl0 would claim the stream was produced by the Apple encoder.
