@@ -1,0 +1,35 @@
+22.9 mpegts
+
+MPEG transport stream muxer.
+
+This muxer implements ISO 13818-1 and part of ETSI EN 300 468.
+
+The muxer options are:
+
+‘-mpegts_original_network_id number’
+Set the original_network_id (default 0x0001). This is unique identifier of a network in DVB. Its main use is in the unique identification of a service through the path Original_Network_ID, Transport_Stream_ID.
+
+‘-mpegts_transport_stream_id number’
+Set the transport_stream_id (default 0x0001). This identifies a transponder in DVB.
+
+‘-mpegts_service_id number’
+Set the service_id (default 0x0001) also known as program in DVB.
+
+‘-mpegts_pmt_start_pid number’
+Set the first PID for PMT (default 0x1000, max 0x1f00).
+
+‘-mpegts_start_pid number’
+Set the first PID for data packets (default 0x0100, max 0x0f00).
+
+The recognized metadata settings in mpegts muxer are service_provider and service_name. If they are not set the default for service_provider is "FFmpeg" and the default for service_name is "Service01".
+
+   
+ffmpeg -i file.mpg -c copy \
+     -mpegts_original_network_id 0x1122 \
+     -mpegts_transport_stream_id 0x3344 \
+     -mpegts_service_id 0x5566 \
+     -mpegts_pmt_start_pid 0x1500 \
+     -mpegts_start_pid 0x150 \
+     -metadata service_provider="Some provider" \
+     -metadata service_name="Some Channel" \
+     -y out.ts
