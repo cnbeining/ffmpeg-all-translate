@@ -1,19 +1,25 @@
-3.1.1 Simple filtergraphs
-Simple filtergraphs are those that have exactly one input and output, both of the same type. In the above diagram they can be represented by simply inserting an additional step between decoding and encoding:
+3.1.1
 
-   
- _________                        __________              ______________
-|         |                      |          |            |              |
-| decoded |  simple filtergraph  | filtered |  encoder   | encoded data |
-| frames  | -------------------> | frames   | ---------> | packets      |
-|_________|                      |__________|            |______________|
+简单的filtergraphs
 
-Simple filtergraphs are configured with the per-stream ‘-filter’ option (with ‘-vf’ and ‘-af’ aliases for video and audio respectively). A simple filtergraph for video can look for example like this:
+简单filtergraphs只有一个相同类型的输入和输出。
 
- 	
- _______        _____________        _______        _____        ________
-|       |      |             |      |       |      |     |      |        |
-| input | ---> | deinterlace | ---> | scale | ---> | fps | ---> | output |
-|_______|      |_____________|      |_______|      |_____|      |________|
+在上面的图中，它们可以通过在解码和编码之间插入一个额外的步骤表示： 
+_________________________________| | | | | ||解码简单的FilterGraph动态|过滤|编码器|编码数据||框架| ------------------- 
+|框架| ---------> |包|| _________ | __________ | | ______________ | 
 
-Note that some filters change frame properties but not frame contents. E.g. the fps filter in the example above changes number of frames, but does not touch the frame contents. Another example is the setpts filter, which only sets timestamps and otherwise passes the frames unchanged.
+简单flitergraphs通过每个流“-filter”而指定。
+
+用"-vf""-af"分别指定视频或音频流。
+
+一个简单的FilterGraph视频处理例子：
+
+________________________________________
+| | | | | | | | | || | ---> 
+|隔行扫描| --- |规模| --- | FPS | ---> |输出输入|
+| _______ | _____________ | | _______ | | _____ |
+| ________ | 
+
+请注意，一些过滤器改变帧属性，不是帧中的内容。
+
+例如，在上面的例子中,帧滤波器只更改帧数，但不接触到帧中的内容。又如setpts滤波器，该滤波器仅设置时间戳，不改变帧。
