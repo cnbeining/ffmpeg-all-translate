@@ -1,14 +1,14 @@
-3. Detailed description
+3.详细说明 下图显示了ffmpeg对每个文件的转码过程：
+____________________________________________________
+| | | | | | | | | |
+|输入|解流器|编码数据|解码器|解码|编码器|编码数据| 混流器 |输出||文件| 
+---------> |包| ---------> |帧| ---------> |包| -------> |文件|| _______ | 
+| ______________ | | _________ | | ______________ | | ________ | 
+(排版全乱了QAQ)
 
-The transcoding process in ffmpeg for each output can be described by the following diagram:
-
-   
- _______              ______________               _________              ______________            ________
-|       |            |              |             |         |            |              |          |        |
-| input |  demuxer   | encoded data |   decoder   | decoded |  encoder   | encoded data |  muxer   | output |
-| file  | ---------> | packets      |  ---------> | frames  | ---------> | packets      | -------> | file   |
-|_______|            |______________|             |_________|            |______________|          |________|
-
-ffmpeg calls the libavformat library (containing demuxers) to read input files and get packets containing encoded data from them. When there are multiple input files, ffmpeg tries to keep them synchronized by tracking lowest timestamp on any active input stream.
-
-Encoded packets are then passed to the decoder (unless streamcopy is selected for the stream, see further for a description). The decoder produces uncompressed frames (raw video/PCM audio/...) which can be processed further by filtering (see next section). After filtering, the frames are passed to the encoder, which encodes them and outputs encoded packets. Finally those are passed to the muxer, which writes the encoded packets to the output file.
+ffmpeg调用libavformat（含解流器）以读取输入文件和其含有的编码数据包。
+当有多个输入文件时，ffmpeg会尝试跟踪最低的时间戳以和活动的输入流同步。
+然后，编码过的数据包被传递给解码器（除非指定某个流，请参阅进一步的说明）。
+该解码器产生未压缩的帧（原始视频/ PCM音频/ ...），以供进一步处理过滤（见下一节）。
+过滤后，帧被传递到编码器，编码并输出编码的数据包。
+最后，所有数据被传递给混流器，将编码的数据包写入到输出文件中。
