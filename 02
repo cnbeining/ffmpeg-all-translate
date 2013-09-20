@@ -1,14 +1,28 @@
-2. Description
+2.绪论 
+------
+FFmpeg是一个非常快的视频和音频转换程序，也可以抓取实时的音频/视频源。
 
-ffmpeg is a very fast video and audio converter that can also grab from a live audio/video source. It can also convert between arbitrary sample rates and resize video on the fly with a high quality polyphase filter.
+通过高品质的多相滤波器，它也可以任意转换采样率和调整视频大小。 
 
-ffmpeg reads from an arbitrary number of input "files" (which can be regular files, pipes, network streams, grabbing devices, etc.), specified by the -i option, and writes to an arbitrary number of output "files", which are specified by a plain output filename. Anything found on the command line which cannot be interpreted as an option is considered to be an output filename.
+ffmpeg的输入“文件”（其可以是普通文件，pipes，网络流，抓取装置等），由-i选项指定任意数量的读取文件，并写入到任意数量，由不同文件名区分的“输出文件”。
 
-Each input or output file can, in principle, contain any number of streams of different types (video/audio/subtitle/attachment/data). The allowed number and/or types of streams may be limited by the container format. Selecting which streams from which inputs will go into which output is either done automatically or with the -map option (see the Stream selection chapter).
+在命令行中,凡是不能被解释为一个选项的成分都被认为是一个输出文件名。 
 
-To refer to input files in options, you must use their indices (0-based). E.g. the first input file is 0, the second is 1, etc. Similarly, streams within a file are referred to by their indices. E.g. 2:3 refers to the fourth stream in the third input file. Also see the Stream specifiers chapter.
+每个输入或输出文件，原则上可以包含任意数量的不同类型的数据流（视频/音频/字幕/附件/数据）。
 
-As a general rule, options are applied to the next specified file. Therefore, order is important, and you can have the same option on the command line multiple times. Each occurrence is then applied to the next input or output file. Exceptions from this rule are the global options (e.g. verbosity level), which should be specified first.
+容器格式允许的数据流数量和/或类型可能有限。
+
+某个流的输入渠道和输出渠道可以自动确定，也可以通过-map 选项指定（见“流选择”一章）。
+
+在选项中，要选择某个输入文件，你必须用他们的代号（从0开始计数）。
+
+例如，第一个输入文件是0，第二个是1，以此类推。与之类似，文件中的数据流也通过代号被指定。
+例如：2:3指的是在第三个输入文件中的第四数据流。请参阅流指示符一章。 
+
+一般的规则是，选项被应用到下一个指定的文件。因此，顺序是很重要的，在命令行可以有多次相同的选项。
+
+每次出现时，它们都应用到下一个输入或输出文件。此规则的例外是全局选项（如 verbosity级别），它们应最先指定。 
+
 
 Do not mix input and output files – first specify all input files, then all output files. Also do not mix options which belong to different files. All options apply ONLY to the next input or output file and are reset between files.
 
