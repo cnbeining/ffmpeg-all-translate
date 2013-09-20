@@ -23,16 +23,17 @@ ffmpeg的输入“文件”（其可以是普通文件，pipes，网络流，抓
 
 每次出现时，它们都应用到下一个输入或输出文件。此规则的例外是全局选项（如 verbosity级别），它们应最先指定。 
 
+不要混合调用输入和输出文件 - 先指定全部的输入文件，然后指定所有输出文件。
 
-Do not mix input and output files – first specify all input files, then all output files. Also do not mix options which belong to different files. All options apply ONLY to the next input or output file and are reset between files.
+也不要混用属于不同的文件的选项。所有的选项适用且只适用于到下一个输入或输出文件，在文件之间重置。
 
-To set the video bitrate of the output file to 64 kbit/s:
-   
+要设置输出文件的视频比特率为64 kbit /s：  
 ffmpeg -i input.avi -b:v 64k -bufsize 64k output.avi
-To force the frame rate of the output file to 24 fps:
- 	
+
+要强制输出文件的帧速率为24 fps：  
 ffmpeg -i input.avi -r 24 output.avi
-To force the frame rate of the input file (valid for raw formats only) to 1 fps and the frame rate of the output file to 24 fps:
- 	
+
+要强制输入的文件的帧速率（仅用于RAW格式）为1 fps，输出文件的帧速率为24 fps：  
 ffmpeg -r 1 -i input.m2v -r 24 output.avi
-The format option may be needed for raw input files.
+
+可能需要为RAW输入文件指定格式选项。
