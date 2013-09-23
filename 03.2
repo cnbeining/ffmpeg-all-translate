@@ -1,12 +1,21 @@
-3.2 Stream copy
+3.2 流复制 
 
-Stream copy is a mode selected by supplying the copy parameter to the ‘-codec’ option. It makes ffmpeg omit the decoding and encoding step for the specified stream, so it does only demuxing and muxing. It is useful for changing the container format or modifying container-level metadata. The diagram above will, in this case, simplify to this:
+流复制通过向"-codec"选项中加入copy参数选择。
 
-   
+ffmpeg省略为指定的流的解码和编码步骤，只解流和混流。
+
+它用于用于改变容器格式或修改容器级元数据。
+
+上面的关系图，在这种情况下可以简化成：  
+
  _______              ______________            ________
 |       |            |              |          |        |
-| input |  demuxer   | encoded data |  muxer   | output |
-| file  | ---------> | packets      | -------> | file   |
+| 输入  |  解流器    | 编码后的     |  混流器  |  输出  |
+| 文件  | ---------> | 数据包       | -------> |  文件  |
 |_______|            |______________|          |________|
 
-Since there is no decoding or encoding, it is very fast and there is no quality loss. However, it might not work in some cases because of many factors. Applying filters is obviously also impossible, since filters work on uncompressed data.
+由于没有解码或编码，它非常快并且没有质量损失。
+
+然而，由于诸多因素，它在某些情况下可能无法正常工作。
+
+应用过滤器显然也是不可能的，因为过滤器只工作于未压缩的数据。
