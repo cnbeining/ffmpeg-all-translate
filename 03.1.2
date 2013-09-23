@@ -1,27 +1,34 @@
+3.1.2 复杂filtergraphs
 
-3.1.2 Complex filtergraphs
-Complex filtergraphs are those which cannot be described as simply a linear processing chain applied to one stream. This is the case, for example, when the graph has more than one input and/or output, or when output stream type is different from input. They can be represented with the following diagram:
+复杂filtergraphs是不能被简单描述为一个施加到流的线性处理链。
 
-   
+例如，当有一个以上的输入和/或输出图像，或输入输出流的类型是不同的。
+
+它们可以用下图表示：
+
  _________
 |         |
-| input 0 |\                    __________
+| 输入 0  |\                    __________
 |_________| \                  |          |
-             \   _________    /| output 0 |
+             \   _________    /| 输出   0 |
               \ |         |  / |__________|
- _________     \| complex | /
+ _________     \|   复杂  | /
 |         |     |         |/
-| input 1 |---->| filter  |\
+| 输入  1 |---->| filter  |\
 |_________|     |         | \   __________
                /| graph   |  \ |          |
-              / |         |   \| output 1 |
+              / |         |   \| 输出   1 |
  _________   /  |_________|    |__________|
 |         | /
-| input 2 |/
+| 输入  2 |/
 |_________|
 
-Complex filtergraphs are configured with the ‘-filter_complex’ option. Note that this option is global, since a complex filtergraph, by its nature, cannot be unambiguously associated with a single stream or file.
+复杂filtergraphs通过"-filter_complex"调整。
 
-The ‘-lavfi’ option is equivalent to ‘-filter_complex’.
+注意，此选项是全局的，因为复杂FilterGraph的性质造成其不能明确地联系一个单流或文件。 
 
-A trivial example of a complex filtergraph is the overlay filter, which has two video inputs and one video output, containing one video overlaid on top of the other. Its audio counterpart is the amix filter.
+'-lavfi'选项等同于“-filter_complex'。 
+
+一个简单的复杂FilterGraph例子是覆盖过滤器（overlay filter），它具有两路视频输入和一路视频输出，在其他视频上叠加一个视频。
+
+其音频对应的是的amix滤波器。
