@@ -1,5 +1,14 @@
-4. Stream selection
+4.流选择 
 
-By default, ffmpeg includes only one stream of each type (video, audio, subtitle) present in the input files and adds them to each output file. It picks the "best" of each based upon the following criteria: for video, it is the stream with the highest resolution, for audio, it is the stream with the most channels, for subtitles, it is the first subtitle stream. In the case where several streams of the same type rate equally, the stream with the lowest index is chosen.
+默认情况下，ffmpeg在输入文件中的每种流类型只包括一个（视频，音频，字幕），并把它们添加到每个输出文件中。
 
-You can disable some of those defaults by using the -vn/-an/-sn options. For full manual control, use the -map option, which disables the defaults just described.
+它根据下列标准选择“最好”的流：
+用于视频流，具有最高分辨率；
+音频，有最多声道；
+字幕，第一个字幕流。
+
+在码率相同的情况下，选择编号最低的。 
+
+您可以使用-vn/-an/-sn禁用这些默认值。
+
+使用-map 手动控制，这会禁用上述的所有默认选择。
