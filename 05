@@ -1,27 +1,37 @@
-5.7 Audio Options
+5.7 音频选项 
 
-‘-aframes number (output)’
-Set the number of audio frames to record. This is an alias for -frames:a.
 
-‘-ar[:stream_specifier] freq (input/output,per-stream)’
-Set the audio sampling frequency. For output streams it is set by default to the frequency of the corresponding input stream. For input streams this option only makes sense for audio grabbing devices and raw demuxers and is mapped to the corresponding demuxer options.
+===========
 
-‘-aq q (output)’
-Set the audio quality (codec-specific, VBR). This is an alias for -q:a.
+‘-aframes number (输出)’
+设置音频帧的记录数量。
+这是 -frames:a 的别名。 
 
-‘-ac[:stream_specifier] channels (input/output,per-stream)’
-Set the number of audio channels. For output streams it is set by default to the number of input audio channels. For input streams this option only makes sense for audio grabbing devices and raw demuxers and is mapped to the corresponding demuxer options.
+‘-ar[:流选择] 频率 (输入/输出,每个流)’
+设置音频采样频率。
+输出数据流缺省情况下被设置为相应的输入流的频率。
+对于输入流，该选项只对音频抓取设备、原始解流器有意义，并被设置到相应的解流器选项中。 
+
+‘-aq q (输出)’
+设置音频质量（指定解码器，VBR）。
+这是 '-q:a' 的别名。 
+
+‘-ac[:流选择器] 声道(输入/输出,每音频流)’
+设置声道的数目。
+缺省情况下,输出数据流被设置为输入音频声道的数目。
+对于输入流，该选项只对音频抓取设备和原始解流器有意义，并被映射到对应的解路器选项。 
 
 ‘-an (output)’
-Disable audio recording.
+禁用录音。 
 
-‘-acodec codec (input/output)’
-Set the audio codec. This is an alias for -codec:a.
+‘-acodec 编码模式(输入/输出)’
+设置音频编码器。
+这是 -codec:a 的别名。 
 
-‘-sample_fmt[:stream_specifier] sample_fmt (output,per-stream)’
-Set the audio sample format. Use -sample_fmts to get a list of supported sample formats.
+‘-sample_fmt[:流选择器] sample_fmt (输出,每音频流)’
+设置音频采样格式。
+使用-sample_fmts查看支持的采样格式列表。 
 
-‘-af filtergraph (output)’
-Create the filtergraph specified by filtergraph and use it to filter the stream.
-
-This is an alias for -filter:a, see the -filter option.
+‘-af filtergraph (输出)’
+创建FilterGraph指定的FilterGraph以过滤流。 
+这是-filter:a的别名，见-filter选项。
