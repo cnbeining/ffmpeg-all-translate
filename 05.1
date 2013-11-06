@@ -1,23 +1,23 @@
-5.1 Stream specifiers
+5.1流选择 
 
-Some options are applied per-stream, e.g. bitrate or codec. Stream specifiers are used to precisely specify which stream(s) a given option belongs to.
+某些选项应用于每个流，如码率，编，解码器。
 
-A stream specifier is a string generally appended to the option name and separated from it by a colon. E.g. -codec:a:1 ac3 contains the a:1 stream specifier, which matches the second audio stream. Therefore, it would select the ac3 codec for the second audio stream.
+流选择符用于精确地指定的数据流（次）属于给定的选项。
 
-A stream specifier can match several streams, so that the option is applied to all of them. E.g. the stream specifier in -b:a 128k matches all audio streams.
+流选择符是字符串，附加在选项，并用冒号隔开。
+例如： -codec:a:1 的选择符是a:1，代表第二个音频流。因此，AC3编解码用于第二音频流。
 
-An empty stream specifier matches all streams. For example, -codec copy or -codec: copy would copy all the streams without reencoding.
+流选择符可以匹配多个数据流，使该选项被应用到所有的流。
+例如，流选择符-b:a 128K与所有音频流相匹配。
 
-Possible forms of stream specifiers are:
+空流选择符匹配所有流。
+例如，-codec copy 或者 -codec:copy 会复制所有的数据流，无需重新编码。
 
-‘stream_index’
-Matches the stream with this index. E.g. -threads:1 4 would set the thread count for the second stream to 4.
+流选择符可能的形式是：'stream_index'匹配该流的索引。
+例如，-threads:1 4 将第二个流设定成4.
 
-‘stream_type[:stream_index]’
-stream_type is one of following: ’v’ for video, ’a’ for audio, ’s’ for subtitle, ’d’ for data, and ’t’ for attachments. If stream_index is given, then it matches stream number stream_index of this type. Otherwise, it matches all streams of this type.
+‘stream_type[:编号]’ 种类包括：v-视频，a-音频，s-字幕，d-数据，t-附件。 如果指定流序号，那么它符合该流的种类。否则，它符合这种类型的所有流。
 
-‘p:program_id[:stream_index]’
-If stream_index is given, then it matches the stream with number stream_index in the program with the id program_id. Otherwise, it matches all streams in the program.
+p:program_id[:stream_index]’ 如果给出流编号，那么它匹配在该程序中该编号的流。否则，它符合程序中所有的流。 
 
-‘#stream_id’
-Matches the stream by a format-specific ID.
+'＃stream_id 由特定格式ID匹配流。
