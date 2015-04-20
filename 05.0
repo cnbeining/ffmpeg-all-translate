@@ -1,7 +1,7 @@
-5. Options
+5. 选项
 
-All the numerical options, if not specified otherwise, accept a string representing a number as input, which may be followed by one of the SI unit prefixes, for example: ’K’, ’M’, or ’G’.
+如果没有指定，数值选项接受数字作为输入的时候，遵循SI单位的前缀，例如：'K'，'M'，'G'。如果SI单位的前面加“i”，整个前缀按照二进制的乘方计算，也就是1024进位，而不是1000.
 
-If ’i’ is appended to the SI unit prefix, the complete prefix will be interpreted as a unit prefix for binary multiplies, which are based on powers of 1024 instead of powers of 1000. Appending ’B’ to the SI unit prefix multiplies the value by 8. This allows using, for example: ’KB’, ’MiB’, ’G’ and ’B’ as number suffixes.
+SI单位的前缀追加'B'的，乘以8。这允许使用，例如：'KB'，'MiB'，'G'和'B'作为数量后缀。
 
-Options which do not take arguments are boolean options, and set the corresponding value to true. They can be set to false by prefixing the option name with "no". For example using "-nofoo" will set the boolean option with name "foo" to false.
+不带参数的选项是布尔选项，并设置相应的值为true。可以通过与“no”的选项设置为false。例如使用“-nofoo”将设置“foo”为False选项。
