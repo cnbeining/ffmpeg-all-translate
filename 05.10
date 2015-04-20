@@ -1,9 +1,9 @@
-5.10 Advanced Subtitle options:
+5.10进阶字幕选项：
 
-‘-fix_sub_duration’
-Fix subtitles durations. For each subtitle, wait for the next packet in the same stream and adjust the duration of the first to avoid overlap. This is necessary with some subtitles codecs, especially DVB subtitles, because the duration in the original packet is only a rough estimate and the end is actually marked by an empty subtitle frame. Failing to use this option when necessary can result in exaggerated durations or muxing failures due to non-monotonic timestamps.
+“-fix_sub_duration”
+修复字幕的持续时间。对于每个字幕行，等待在相同的流中的下一行，并调节本行的持续时间，以避免重叠。对于某些字幕编解码器是必要的，特别是数字电视广播字幕，因为在原来字幕的持续时间仅仅是粗略的估计，尾巴实际上是一个空的字幕帧标记。不使用这个选项，有可能导致夸张的持续时间，或由于非单调时间戳（重叠）导致混流故障。
 
-Note that this option will delay the output of all data until the next subtitle packet is decoded: it may increase memory consumption and latency a lot.
+注意，此选项将延迟所有数据的输出，直到下一个字幕行被解码：可能会增加内存消耗和大量延迟。
 
-‘-canvas_size size’
-Set the size of the canvas used to render subtitles.
+“-canvas_size 大小”
+设置用于呈现字幕的画布的大小。
