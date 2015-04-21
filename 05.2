@@ -1,112 +1,113 @@
-5.2 Generic options
+5.2一般选择
 
-These options are shared amongst the ff* tools.
+这些选项在ff*工具共享。
 
 ‘-L’
-Show license.
+
+显示许可证。
 
 ‘-h, -?, -help, --help [arg]’
-Show help. An optional parameter may be specified to print help about a specific item.
 
-Possible values of arg are:
+显示帮助。通过可选参数，可以指定输出特定项目的帮助。
+
+可能的值：
 
 ‘decoder=decoder_name’
-Print detailed information about the decoder named decoder_name. Use the ‘-decoders’ option to get a list of all decoders.
+打印关于解码器decoder_name的详细信息。使用“-decoders'选项获得所有解码器的列表。
 
 ‘encoder=encoder_name’
-Print detailed information about the encoder named encoder_name. Use the ‘-encoders’ option to get a list of all encoders.
+打印关于指定编码器“encoder_name”的详细信息。使用“-encoders'选项获得所有编码器的列表。
 
 ‘demuxer=demuxer_name’
-Print detailed information about the demuxer named demuxer_name. Use the ‘-formats’ option to get a list of all demuxers and muxers.
+打印关于解流器demuxer_name的详细信息。使用‘-formats’选项来获取所有解流器和混流器的列表。
 
 ‘muxer=muxer_name’
-Print detailed information about the muxer named muxer_name. Use the ‘-formats’ option to get a list of all muxers and demuxers.
+打印关于混流器muxer_name的详细信息。使用‘-formats’选项来获取所有解流器和混流器的列表。
 
 ‘filter=filter_name’
-Print detailed information about the filter name filter_name. Use the ‘-filters’ option to get a list of all filters.
+打印关于流选择器filter_name的详细信息。使用“-filters'选项来获得所有流选择器的列表。
 
 ‘-version’
-Show version.
+显示版本。
 
 ‘-formats’
-Show available formats.
+显示可用的格式。
 
 ‘-codecs’
-Show all codecs known to libavcodec.
-
-Note that the term ’codec’ is used throughout this documentation as a shortcut for what is more correctly called a media bitstream format.
+显示libavcodec所有的已知格式。注意，术语“编码”用于整个文档，是“媒体流格式”的缩写。
 
 ‘-decoders’
-Show available decoders.
+显示可用的解码器。
 
 ‘-encoders’
-Show all available encoders.
+显示所有可用的编码器。
 
 ‘-bsfs’
-Show available bitstream filters.
+显示可用的码流过滤器。
 
 ‘-protocols’
-Show available protocols.
+显示可用的协议。
 
-‘-filters’
-Show available libavfilter filters.
+“-filters”
+显示libavfilter可用的流选择器。
 
-‘-pix_fmts’
-Show available pixel formats.
+“-pix_fmts”
+显示可用的像素格式。
 
-‘-sample_fmts’
-Show available sample formats.
+“-sample_fmts”
+显示可用的采样格式。
 
-‘-layouts’
-Show channel names and standard channel layouts.
+“-layouts”
+显示声道名称和标准声道布局。
 
 ‘-loglevel [repeat+]loglevel | -v [repeat+]loglevel’
-Set the logging level used by the library. Adding "repeat+" indicates that repeated log output should not be compressed to the first line and the "Last message repeated n times" line will be omitted. "repeat" can also be used alone. If "repeat" is used alone, and with no prior loglevel set, the default loglevel will be used. If multiple loglevel parameters are given, using ’repeat’ will not change the loglevel. loglevel is a number or a string containing one of the following values:
+设置使用的日志级别。加入“repeat+”表示重复日志输出不被压缩到第一行，“最后的消息重复了n次”将被省略。 “repeat”也可以单独使用。如果“repeat”​​单独使用，没有事先设置日志级别，将使用默认级别。如果给定多个日志级别参数，使用'repeat'不会改变日志级别。日志级别是一个数字或含有下列值之一的字符串：
 
-‘quiet’
-Show nothing at all; be silent.
+“quiet”
+没有任何显示；沉默。
 
-‘panic’
-Only show fatal errors which could lead the process to crash, such as and assert failure. This is not currently used for anything.
+“panic”
+只显示可能导致程序崩溃的致命错误，如断言（assert）失败。目前没用。
 
-‘fatal’
-Only show fatal errors. These are errors after which the process absolutely cannot continue after.
+“fatal”
+只显示致命错误。这些错误之后绝对无法继续。
 
-‘error’
-Show all errors, including ones which can be recovered from.
+'error'
+显示所有的错误，包括可以恢复的。
 
-‘warning’
-Show all warnings and errors. Any message related to possibly incorrect or unexpected events will be shown.
+“warning”
+显示所有警告和错误。任何关于可能不正确或突发事件的信息。
 
-‘info’
-Show informative messages during processing. This is in addition to warnings and errors. This is the default value.
+“info”
+显示处理过程中的信息。info在警告和错误之上。默认值。
 
-‘verbose’
-Same as info, except more verbose.
+“verbose”
+和info一样，但更详细。
 
-‘debug’
-Show everything, including debugging information.
+“debug”
+显示一切，包括调试信息。
 
-By default the program logs to stderr, if coloring is supported by the terminal, colors are used to mark errors and warnings. Log coloring can be disabled setting the environment variable AV_LOG_FORCE_NOCOLOR or NO_COLOR, or can be forced setting the environment variable AV_LOG_FORCE_COLOR. The use of the environment variable NO_COLOR is deprecated and will be dropped in a following FFmpeg version.
+默认情况下，程序日志输出到stderr，如果终端支持颜色，用颜色标记错误和警告。日志着色可以设置环境变量AV_LOG_FORCE_NOCOLOR或NO_COLOR禁用，或者可以被强制设置环境变量AV_LOG_FORCE_COLOR。环境变量NO_COLOR被弃用，在以后的FFmpeg的版本将被丢弃。
 
-‘-report’
-Dump full command line and console output to a file named program-YYYYMMDD-HHMMSS.log in the current directory. This file can be useful for bug reports. It also implies -loglevel verbose.
+“-report'
+导出完整的命令行和控制台输出到一个在当前目录下名为program-YYYYMMDD-HHMMSS.log的文件。此文件对错误报告非常有用。也意味着-loglevel verbose。
 
-Setting the environment variable FFREPORT to any value has the same effect. If the value is a ’:’-separated key=value sequence, these options will affect the report; options values must be escaped if they contain special characters or the options delimiter ’:’ (see the “Quoting and escaping” section in the ffmpeg-utils manual). The following option is recognized:
+设定环境变量FFREPORT为任意值具有相同的效果。如果该值是’:’-separated key=value序列，这些选项会影响报告;如果包含特殊字符或选项分隔符选项的值“:”，必须转义（参考ffmpeg-utils的手册中的“报告和转义”一节）。下面的选项可用：
 
 ‘file’
-set the file name to use for the report; %p is expanded to the name of the program, %t is expanded to a timestamp, %% is expanded to a plain %
-
-Errors in parsing the environment variable are not fatal, and will not appear in the report.
+设置报告的文件名; ％p是该程序的名字，％t是一个时间戳，%%变成％。解析环境变量的错误不是致命的，不会出现在报告中。
 
 ‘-cpuflags flags (global)’
-Allows setting and clearing cpu flags. This option is intended for testing. Do not use it unless you know what you’re doing.
+允许设置和清除CPU flags。此选项用于测试。除非你知道自己在做什么，不要使用它。
+
 
    
 ffmpeg -cpuflags -sse+mmx ...
 ffmpeg -cpuflags mmx ...
 ffmpeg -cpuflags 0 ...
-Possible flags for this option are:
+可能选项：
+
+
 
 ‘x86’
 ‘mmx’
@@ -145,6 +146,6 @@ Possible flags for this option are:
 ‘athlonxp’
 ‘k8’
 ‘-opencl_options options (global)’
-Set OpenCL environment options. This option is only available when FFmpeg has been compiled with --enable-opencl.
+参考OpenCL环境选项。仅当FFmpeg使用--enable-opencl编译时可用。
 
-options must be a list of key=value option pairs separated by ’:’. See the “OpenCL Options” section in the ffmpeg-utils manual for the list of supported options.
+选项必须是“:”分隔的key = value列表。参考ffmpeg-utils手册中的“OpenCL选项”部分获取支持的选项列表。
