@@ -1,10 +1,10 @@
-5.8 Advanced Audio options:
+5.8 进阶音频选项:
 
 ‘-atag fourcc/tag (output)’
-Force audio tag/fourcc. This is an alias for -tag:a.
+强制音频 标签／四字符代码。 这是'-tag:a'的一个别名。
 
 ‘-absf bitstream_filter’
-Deprecated, see -bsf
+已废弃, 见 -bsf
 
 ‘-guess_layout_max channels (input,per-stream)’
-If some input channel layout is not known, try to guess only if it corresponds to at most the specified number of channels. For example, 2 tells to ffmpeg to recognize 1 channel as mono and 2 channels as stereo but not 6 channels as 5.1. The default is to always try to guess. Use 0 to disable all guessing.
+若输入的声道布局未知，将尝试猜测与其对应的最多声道数量。例如，2告诉ffmpeg将单通道识别为单声道，将双通道识别为立体声，但5.1环绕声并不会被识别成六通道。默认行为为总是猜测。使用'0'来禁用全部猜测。
