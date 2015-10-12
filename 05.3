@@ -1,19 +1,19 @@
-5.3 AVOptions
+5.3 AV选项
 
-These options are provided directly by the libavformat, libavdevice and libavcodec libraries. To see the list of available AVOptions, use the ‘-help’ option. They are separated into two categories:
+这些选项由libavformat，libavdevice和libavcodec库直接提供。若查看列表中可用的AV选项，请使用'-help'命令。它们被分为两类：
 
-‘generic’
-These options can be set for any container, codec or device. Generic options are listed under AVFormatContext options for containers/devices and under AVCodecContext options for codecs.
+'generic'（常规）
+这些选项可用于设置任何容器、编码或设备。通用选项对于列在AVFormatContext中的容器/设备以及AVCodecContext中的编码均有效。
 
-‘private’
-These options are specific to the given container, device or codec. Private options are listed under their corresponding containers/devices/codecs.
+'private'（私有）
+这类选项仅对特定的容器、设备或者编码有效。私有选项由相应的容器/设备/编码来指定。
 
-For example to write an ID3v2.3 header instead of a default ID3v2.4 to an MP3 file, use the ‘id3v2_version’ private option of the MP3 muxer:
+例如在一个默认为ID3v2.4为头部的MP3文件中写入ID3v2.3头，使用'id3v2_version'私有选项来对MP3混流：
 
    
 ffmpeg -i input.flac -id3v2_version 3 out.mp3
-All codec AVOptions are obviously per-stream, so the chapter on stream specifiers applies to them
+所有编码AV选项显然都是针对每一流的，因此适用于流内章节信息的说明符。
 
-Note ‘-nooption’ syntax cannot be used for boolean AVOptions, use ‘-option 0’/‘-option 1’.
+注意 '-nooption'语法不能被用于AV选项中的布尔类型值项目，须使用 ‘-option 0’/‘-option 1’。
 
-Note2 old undocumented way of specifying per-stream AVOptions by prepending v/a/s to the options name is now obsolete and will be removed soon.
+注意2 以往使用的v/a/s命名指定每个流的AV选项语法已经过时并会很快被移除。
