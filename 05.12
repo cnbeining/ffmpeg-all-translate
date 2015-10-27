@@ -1,11 +1,11 @@
-5.12 Preset files
+5.12 配置文件
 
-A preset file contains a sequence of option=value pairs, one for each line, specifying a sequence of options which would be awkward to specify on the command line. Lines starting with the hash (’#’) character are ignored and are used to provide comments. Check the ‘presets’ directory in the FFmpeg source tree for examples.
+配置文件包含一捆设置=值 的对，一个一行，里面放不想在命令行放的设置。行前面加#号是注释。在FFmpeg源码的presets文件夹里面有例子。
 
-Preset files are specified with the vpre, apre, spre, and fpre options. The fpre option takes the filename of the preset instead of a preset name as input and can be used for any kind of codec. For the vpre, apre, and spre options, the options specified in a preset file are applied to the currently selected codec of the same type as the preset option.
+配置文件有vpre, apre, spre和 fpre设置。fpre是用文件名当输入的配置，任何编码器都可以用。vpre, apre和 spre是针对某种流的配置。
 
-The argument passed to the vpre, apre, and spre preset options identifies the preset file to use according to the following rules:
+vpre, apre, spre和 fpre设置的使用方法：
 
-First ffmpeg searches for a file named arg.ffpreset in the directories ‘$FFMPEG_DATADIR’ (if set), and ‘$HOME/.ffmpeg’, and in the datadir defined at configuration time (usually ‘PREFIX/share/ffmpeg’) or in a ‘ffpresets’ folder along the executable on win32, in that order. For example, if the argument is libvpx-1080p, it will search for the file ‘libvpx-1080p.ffpreset’.
+首先FFmpeg在‘$FFMPEG_DATADIR’（如果设置了）找arg.ffpreset文件；然后是‘$HOME/.ffmpeg’；然后是编译时的数据文件夹（一般是‘PREFIX/share/ffmpeg’）；在Win32下，和可执行文件一起的‘ffpresets’文件夹。例如，如果设置是libvpx-1080p，就会找‘libvpx-1080p.ffpreset’。
 
-If no such file is found, then ffmpeg will search for a file named codec_name-arg.ffpreset in the above-mentioned directories, where codec_name is the name of the codec to which the preset file options will be applied. For example, if you select the video codec with -vcodec libvpx and use -vpre 1080p, then it will search for the file ‘libvpx-1080p.ffpreset’.
+如果找不到，就在上面的文件夹找codec_name-arg.ffpreset，codec_name是要使用的编码器名称。例如，如果敲-vcodec libvpx -vpre 1080p，就去找‘libvpx-1080p.ffpreset’。
