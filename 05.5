@@ -1,50 +1,52 @@
-5.5 Video Options
+5.5 视频选项
 
-‘-vframes number (output)’
-Set the number of video frames to record. This is an alias for -frames:v.
+‘-vframes 数 (输出)’
+设置要录制的视频帧数。-frames:v的别名。
 
-‘-r[:stream_specifier] fps (input/output,per-stream)’
-Set frame rate (Hz value, fraction or abbreviation).
+‘-r[:流] fps (输入/输出,每个流)’
+设置帧率（Hz，分数或缩写）
 
-As an input option, ignore any timestamps stored in the file and instead generate timestamps assuming constant frame rate fps.
+如果是输入选项，忽略文件中存储的时间戳，假定是固定帧率，重新生成时间戳.
 
-As an output option, duplicate or drop input frames to achieve constant output frame rate fps.
+如果是输出选项，复制或者丢帧以达到固定帧率。
 
-‘-s[:stream_specifier] size (input/output,per-stream)’
-Set frame size.
+‘-s[:流] size (输入/输出,每个流)’
+设置帧大小.
 
-As an input option, this is a shortcut for the ‘video_size’ private option, recognized by some demuxers for which the frame size is either not stored in the file or is configurable – e.g. raw video or video grabbers.
+如果是输入选项，这个是video_size私有选项的简写，为一些不设帧率的解流器（例如原始视频流或者采集器）所使用。
 
-As an output option, this inserts the scale video filter to the end of the corresponding filtergraph. Please use the scale filter directly to insert it at the beginning or some other place.
+如果是输出选项，则在对应的过滤器图尾插入视频尺度滤波器。
+如果在其他位置插入，直接使用尺度滤波器。
 
-The format is ‘wxh’ (default - same as source).
+格式是wxh，默认与原视频同样。
 
-‘-aspect[:stream_specifier] aspect (output,per-stream)’
-Set the video display aspect ratio specified by aspect.
+‘-aspect[:流] aspect (输出,每个流)’
+设置视频显示长宽比。
 
-aspect can be a floating point number string, or a string of the form num:den, where num and den are the numerator and denominator of the aspect ratio. For example "4:3", "16:9", "1.3333", and "1.7777" are valid argument values.
+长宽比可以是浮点数或者比例，例如"4:3", "16:9", "1.3333", 和 "1.7777"都是合法的长宽比。
 
-If used together with ‘-vcodec copy’, it will affect the aspect ratio stored at container level, but not the aspect ratio stored in encoded frames, if it exists.
+如果与‘-vcodec copy’共用，将在容器层面影响长宽比，然而不影响存储后的每个帧，如果存在。
 
-‘-vn (output)’
-Disable video recording.
+‘-vn (输出)’
+禁用视频输出。
 
-‘-vcodec codec (output)’
-Set the video codec. This is an alias for -codec:v.
+‘-vcodec codec (输出)’
+设置视频编码器。-codec:v的别名。
 
-‘-pass[:stream_specifier] n (output,per-stream)’
-Select the pass number (1 or 2). It is used to do two-pass video encoding. The statistics of the video are recorded in the first pass into a log file (see also the option -passlogfile), and in the second pass that log file is used to generate the video at the exact requested bitrate. On pass 1, you may just deactivate audio and set output to null, examples for Windows and Unix:
-
+‘-pass[:流] n (输出,每流)’
+设置pass数（1或2）。2pass编码使用。第一次编码时视频数据被录制入日志文件（参见-passlogfile），第二次使用日志文件精确地生成指定码率的视频。第一次编码可以关闭音频，设置输出为空，例如：
    
 ffmpeg -i foo.mov -c:v libxvid -pass 1 -an -f rawvideo -y NUL
 ffmpeg -i foo.mov -c:v libxvid -pass 1 -an -f rawvideo -y /dev/null
-‘-passlogfile[:stream_specifier] prefix (output,per-stream)’
-Set two-pass log file name prefix to prefix, the default file name prefix is “ffmpeg2pass”. The complete file name will be ‘PREFIX-N.log’, where N is a number specific to the output stream
 
-‘-vlang code’
-Set the ISO 639 language code (3 letters) of the current video stream.
 
-‘-vf filtergraph (output)’
-Create the filtergraph specified by filtergraph and use it to filter the stream.
+‘-pass日志文件[:流] 前缀 (输出,每流)’
+设置2pass的日志文件前缀，默认是ffmpeg2pass。完整文件名是‘前缀-N.log’，N是输出流编号。
 
-This is an alias for -filter:v, see the -filter option.
+‘-vlang 编码’
+设置当前视频流的三字ISO 639语言编码。
+
+‘-vf 过滤器图 (output)’
+建立标注的过滤器图以过滤流。
+
+-filter:v的别名，参见-filter。
