@@ -1,45 +1,45 @@
-5.4 Main options
+5.4 主选项
 
-‘-f fmt (input/output)’
-Force input or output file format. The format is normally auto detected for input files and guessed from the file extension for output files, so this option is not needed in most cases.
+‘-f 格式 (输入/输出)’
+强制指定输入输出文件格式。一般输入文件格式自动识别，输出文件格式根据扩展名猜测，所以一般不需要本选项。
 
-‘-i filename (input)’
-input file name
+‘-i 文件名 (输入)’
+输入文件名。
 
-‘-y (global)’
-Overwrite output files without asking.
+‘-y (全局)’
+静默覆写输出文件。
 
-‘-n (global)’
-Do not overwrite output files, and exit immediately if a specified output file already exists.
+‘-n (全局)’
+不静默覆写输出文件，如果输出文件存在立即退出。
 
-‘-c[:stream_specifier] codec (input/output,per-stream)’
-‘-codec[:stream_specifier] codec (input/output,per-stream)’
-Select an encoder (when used before an output file) or a decoder (when used before an input file) for one or more streams. codec is the name of a decoder/encoder or a special value copy (output only) to indicate that the stream is not to be re-encoded.
+‘-c[:流] 编码 (输入/输出,每流)’
+‘-codec[:流] 编码 (输入/输出,每流)’
+对一个或多个流选择输入输出文件的解编码器。codec是编码器名称，或者copy：不重新编码。
 
-For example
+例如
 
    
 ffmpeg -i INPUT -map 0 -c:v libx264 -c:a copy OUTPUT
-encodes all video streams with libx264 and copies all audio streams.
+用libx264压制所有视频流，复制所有音频流
 
-For each stream, the last matching c option is applied, so
+每个流用一个-c，
 
  	
 ffmpeg -i INPUT -map 0 -c copy -c:v:1 libx264 -c:a:137 libvorbis OUTPUT
-will copy all the streams except the second video, which will be encoded with libx264, and the 138th audio, which will be encoded with libvorbis.
+除了第二个视频流用libx264编码外全部复制，第138个音频流用libvorbis编码。
 
-‘-t duration (output)’
-Stop writing the output after its duration reaches duration. duration may be a number in seconds, or in hh:mm:ss[.xxx] form.
+‘-t 时长 (输出)’
+到时长后停止输出。时长可以是秒数，也可以是hh:mm:ss[.xxx]格式。
 
--to and -t are mutually exclusive and -t has priority.
+-to 和 -t 互斥， -t 优先。
 
-‘-to position (output)’
-Stop writing the output at position. position may be a number in seconds, or in hh:mm:ss[.xxx] form.
+‘-to 位置 (输出)’
+到位置后停止输出。位置可以是秒数，也可以是hh:mm:ss[.xxx]格式。
 
--to and -t are mutually exclusive and -t has priority.
+-to 和 -t 互斥， -t 优先。
 
-‘-fs limit_size (output)’
-Set the file size limit, expressed in bytes.
+‘-fs 体积限制 (输出)’
+字节数的输出文件体积限制。
 
 ‘-ss position (input/output)’
 When used as an input option (before -i), seeks in this input file to position. When used as an output option (before an output filename), decodes but discards input until the timestamps reach position. This is slower, but more accurate.
