@@ -41,23 +41,23 @@ ffmpeg -i INPUT -map 0 -c copy -c:v:1 libx264 -c:a:137 libvorbis OUTPUT
 ‘-fs 体积限制 (输出)’
 字节数的输出文件体积限制。
 
-‘-ss position (input/output)’
-When used as an input option (before -i), seeks in this input file to position. When used as an output option (before an output filename), decodes but discards input until the timestamps reach position. This is slower, but more accurate.
+‘-ss 位置 (输入/输出)’
+当用于文件输入时(在 -i 前)，定位输入文件到位置。当用于文件输出时（在输出文件名前），解码并丢弃该位置对应时间戳前的输入文件数据。此做法虽慢，但更精确。
 
-position may be either in seconds or in hh:mm:ss[.xxx] form.
+位置可以是以秒为单位或者 hh:mm:ss[.xxx]格式。
 
-‘-itsoffset offset (input)’
-Set the input time offset in seconds. [-]hh:mm:ss[.xxx] syntax is also supported. The offset is added to the timestamps of the input files. Specifying a positive offset means that the corresponding streams are delayed by offset seconds.
+‘-itsoffset 偏移 (输入)’
+以秒为单位来设置输入文件的时间偏移。且支持 [-]hh:mm:ss[.xxx] 语法。偏移量会附加到输入文件的时间戳上。指定一个正向偏移，意味着所指定的流会以 时间戳+偏移量 作为最终输出的时间戳。
 
-‘-timestamp time (output)’
-Set the recording timestamp in the container. The syntax for time is:
+‘-timestamp 时间 (输出)’
+设置在容器中记录时间戳。对于时间上的语法为：
 
  	
 now|([(YYYY-MM-DD|YYYYMMDD)[T|t| ]]((HH:MM:SS[.m...])|(HHMMSS[.m...]))[Z|z])
-If the value is "now" it takes the current time. Time is local time unless ’Z’ or ’z’ is appended, in which case it is interpreted as UTC. If the year-month-day part is not specified it takes the current year-month-day.
+如果数值是 “now” 即获取当前时间。若附加了‘Z’ 或 ‘z’，时区将为当地时间，否则将为UTC时间。若年-月-日部分未被指定，将获取当前值作为年-月-日。
 
 ‘-metadata[:metadata_specifier] key=value (output,per-metadata)’
-Set a metadata key/value pair.
+指定元数据中的键值对。
 
 An optional metadata_specifier may be given to set metadata on streams or chapters. See -map_metadata documentation for details.
 
